@@ -41,4 +41,14 @@ class EmailController extends Controller
         return $this->render('email/new.html.twig', array('form' => $form->createView(), 'entity' => $email));
 
     }
+
+    /**
+     * @Route("/email/list/{domain}", name="email_list", requirements={"domain": "\d+"})
+     */
+    public function listAction(Request $request, Domain $domain)
+    {
+        $emailRepo = $this->getDoctrine()->getRepository('AppBundle:Email')->findBy(array('domain' => $domain));
+
+        return $this->render('email/list.html.twig', ['emails' => $emailRepo]);
+    }
 }

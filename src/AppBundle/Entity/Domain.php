@@ -24,6 +24,20 @@ class Domain
     }
 
     /**
+     * @return bool
+     * @Assert\IsTrue(message="There is more emails")
+     */
+    public function isNumberOfEmailsValid()
+    {
+        if( $this->getEmailCount() <= $this->emailNumbers )
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * @ORM\Column(type="text")
      * Assert\Url(checkDNS="true", protocols={""})
      */

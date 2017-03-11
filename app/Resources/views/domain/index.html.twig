@@ -4,7 +4,7 @@
     <div id="wrapper">
         <div id="container">
                 {% for domain in domains %}
-                    {{ domain.name }} - {{ domain.emailCount }} / {{ domain.emailNumbers }}<br \>
+                    <a href="{{ path('email_list', { 'domain': domain.id }) }}">{{ domain.name }}</a> - {{ domain.emailCount }} / {{ domain.emailNumbers }} - <a href="{{ path('domain_edit', {'domain': domain.id}) }}">edit</a> - <a href="{{ path('domain_remove', { 'domain': domain.id }) }}">del</a> <br \>
                 {% endfor %}
         </div>
     </div>

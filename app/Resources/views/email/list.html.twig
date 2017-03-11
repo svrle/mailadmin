@@ -3,9 +3,6 @@
 {% block body %}
     <div id="wrapper">
         <div id="container">
-            <div id="welcome">
-                <h1><span>Welcome to</span> Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</h1>
-            </div>
 
             <div class="col-lg-6">
                 <p>
@@ -14,19 +11,6 @@
                 {% endfor %}
                 </p>
             </div>
-
-            <div id="next">
-                <h2>What's next?</h2>
-                <p>
-
-
-                    Read the documentation to learn
-                    <a href="http://symfony.com/doc/{{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION')[:3] }}/page_creation.html">
-                        How to create your first page in Symfony
-                    </a>
-                </p>
-            </div>
-
         </div>
     </div>
 {% endblock %}

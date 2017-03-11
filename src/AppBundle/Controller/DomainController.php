@@ -16,7 +16,6 @@ class DomainController extends Controller
     public function indexAction()
     {
         $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->findAll();
-
         return $this->render('domain/index.html.twig', ['domains' => $domainRepo]);
     }
 
@@ -39,7 +38,7 @@ class DomainController extends Controller
     }
 
     /**
-     * @Route("/domain/edit/{domain}", name="domain_new", requirements={"domain": "\d+"})
+     * @Route("/domain/edit/{domain}", name="domain_edit", requirements={"domain": "\d+"})
      */
     public function editAction(Request $request, Domain $domain)
     {
@@ -54,5 +53,25 @@ class DomainController extends Controller
         }
         return $this->render('domain/new.html.twig', array('form' => $form->createView()));
 
+    }
+
+    /**
+     * @Route("/domain/remove/{domain}", name="domain_remove", requirements={"domain": "\d+"})
+     */
+    public function removeAction(Request $request, Domain $domain)
+    {
+        $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->find($domain);
+        if($domainRepo->getEmailCount() == 0)
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($domainRepo);
+            $em->flush();
+        }else {
+            throw $this->createNotFoundException(
+                'This '. $domain . ' have ' . $domain->getEmailCount() . ' emails'
+            );
+        }
+
+        return $this->forward('AppBundle:Domain:index');
     }
 }
