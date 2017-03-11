@@ -61,6 +61,14 @@ class DomainController extends Controller
     public function removeAction(Request $request, Domain $domain)
     {
         $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->find($domain);
+
+        if(!$domainRepo)
+        {
+            throw $this->createNotFoundException(
+                'Wrong domain name'
+            );
+        }
+
         if($domainRepo->getEmailCount() == 0)
         {
             $em = $this->getDoctrine()->getManager();
@@ -72,6 +80,6 @@ class DomainController extends Controller
             );
         }
 
-        return $this->forward('AppBundle:Domain:index');
+        return $this->redirectToRoute('domain_homepage');
     }
 }
