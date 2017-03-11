@@ -16,10 +16,8 @@ class EmailController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-        ]);
+        $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->findAll();
+        return $this->render('email/index.html.twig', ['domains' => $domainRepo]);
     }
 
     /**
@@ -29,7 +27,6 @@ class EmailController extends Controller
     {
         $email = new Email();
         $email->setDomain($domain);
-//        $domain->setEmails($email); // ?
         $form = $this->createForm(EmailType::class, $email);
         $form->handleRequest($request);
         if ($form->isValid()) {
@@ -50,5 +47,29 @@ class EmailController extends Controller
         $emailRepo = $this->getDoctrine()->getRepository('AppBundle:Email')->findBy(array('domain' => $domain));
 
         return $this->render('email/list.html.twig', ['emails' => $emailRepo]);
+    }
+
+    /**
+     * @Route("/email/edit/{email}", name="email_edit", requirements={"email": "\d+"})
+     */
+    public function editAction(Request $request, Email $email)
+    {
+        $emailRepo = $this->getDoctrine()->getRepository('AppBundle:Email')->find($email);
+        if(!$emailRepo)
+        {
+            throw $this->createNotFoundException(
+                'Wrong email name'
+            );
+        }
+        $form = $this->createForm(EmailType::class, $emailRepo);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($emailRepo);
+            $em->flush();
+            return $this->redirect($this->generateUrl('email_homepage'));
+        }
+        return $this->render('email/new.html.twig', array('form' => $form->createView()));
+
     }
 }

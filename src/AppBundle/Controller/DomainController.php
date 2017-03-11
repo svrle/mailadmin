@@ -43,6 +43,12 @@ class DomainController extends Controller
     public function editAction(Request $request, Domain $domain)
     {
         $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->find($domain);
+        if(!$domainRepo)
+        {
+            throw $this->createNotFoundException(
+                'Wrong domain name'
+            );
+        }
         $form = $this->createForm(DomainType::class, $domainRepo);
         $form->handleRequest($request);
         if ($form->isValid()) {

@@ -35,12 +35,12 @@ class Email
     protected $password;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $name;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $surname;
 
@@ -54,6 +54,10 @@ class Email
      */
     public function getQuota()
     {
+        if($this->quota == null)
+        {
+            $this->quota = $this->getDomain()->getDefaultQuota();
+        }
         return $this->quota;
     }
 

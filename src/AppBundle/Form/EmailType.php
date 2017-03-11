@@ -13,6 +13,11 @@ class EmailType extends AbstractType
     {
         $builder
             ->add('username')
+            ->add('name')
+            ->add('surname')
+
+            ->add('password')
+            ->add('quota')
             ->add('save', SubmitType::class)
         ;
     }

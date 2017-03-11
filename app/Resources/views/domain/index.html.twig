@@ -1,5 +1,4 @@
-{% extends 'MopaBootstrapBundle::base.html.twig' %}
-
+{% extends 'base.html.twig' %}
 {% block body %}
     <div id="wrapper">
         <div id="container">
@@ -7,6 +6,7 @@
                     <a href="{{ path('email_list', { 'domain': domain.id }) }}">{{ domain.name }}</a>
                     - {{ domain.emailCount }} / {{ domain.emailNumbers }}
                     - <a href="{{ path('domain_edit', {'domain': domain.id}) }}">edit</a>
+                    - <a href="{{ path('email_new', { 'domain': domain.id }) }}">new email</a>
                     {% if domain.emailCount == 0 %}
                     - <a href="{{ path('domain_remove', { 'domain': domain.id }) }}" onclick="return confirm('are u sure?')">del</a>
                     {% endif %}
