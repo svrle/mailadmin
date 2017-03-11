@@ -37,4 +37,22 @@ class DomainController extends Controller
         return $this->render('domain/new.html.twig', array('form' => $form->createView()));
 
     }
+
+    /**
+     * @Route("/domain/edit/{domain}", name="domain_new", requirements={"domain": "\d+"})
+     */
+    public function editAction(Request $request, Domain $domain)
+    {
+        $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->find($domain);
+        $form = $this->createForm(DomainType::class, $domainRepo);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($domainRepo);
+            $em->flush();
+            return $this->redirect($this->generateUrl('domain_homepage'));
+        }
+        return $this->render('domain/new.html.twig', array('form' => $form->createView()));
+
+    }
 }

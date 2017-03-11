@@ -18,10 +18,14 @@ class Domain
         $this->emails = new ArrayCollection() ;
     }
 
+    public function getEmailCount()
+    {
+        return count($this->getEmails());
+    }
+
     /**
      * @ORM\Column(type="text")
      * Assert\Url(checkDNS="true", protocols={""})
-     *
      */
     protected $name;
 
