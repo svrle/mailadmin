@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Entity\DomainRepository")
@@ -18,6 +20,8 @@ class Domain
 
     /**
      * @ORM\Column(type="text")
+     * Assert\Url(checkDNS="true", protocols={""})
+     *
      */
     protected $name;
 
@@ -103,6 +107,7 @@ class Domain
 
     /**
      * @return mixed
+     *
      */
     public function getName()
     {

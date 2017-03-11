@@ -1,6 +1,7 @@
 {% extends 'MopaBootstrapBundle::base.html.twig' %}
 
 {% block body %}
+<div class="col-lg-6">
     {{ form_start(form) }}
 
     {{ form_label(form.username) }}<br />
@@ -9,6 +10,7 @@
 
     {{ form_rest(form) }}
     {{ form_end(form) }}
+</div>
 {% endblock %}
 
 {% block stylesheets %}
