@@ -94,5 +94,5 @@ class DomainController extends Controller
 
         return $this->redirectToRoute('domain_homepage');
     }
-    
+
 }
