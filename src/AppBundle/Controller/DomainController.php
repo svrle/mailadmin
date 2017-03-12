@@ -20,7 +20,7 @@ class DomainController extends Controller
         $pagination = $paginator->paginate(
             $domainRepo, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
-            2/*limit per page*/
+            $this->getParameter('knp_per_page')/*limit per page*/
         );
         return $this->render('domain/index.html.twig', ['domains' => $pagination]);
     }
