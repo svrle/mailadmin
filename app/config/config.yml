@@ -88,9 +88,9 @@ assetic:
     filters:
         cssrewrite: ~
 
-mopa_bootstrap:
-    form: ~  # Adds twig form theme  support
-    menu: ~  # enables twig helpers for menu
+#mopa_bootstrap:
+#    form: ~  # Adds twig form theme  support
+#    menu: ~  # enables twig helpers for menu
 
 knp_paginator:
     page_range: 2                      # default page range used in pagination control

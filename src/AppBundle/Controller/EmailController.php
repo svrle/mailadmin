@@ -96,4 +96,12 @@ class EmailController extends Controller
 
         return $this->redirectToRoute('email_homepage');
     }
+
+    /**
+     * @Route("/email/details/{email}", name="email_details", requirements={"email": "\d+"})
+     */
+    public function detailsAction(Request $request, Email $email)
+    {
+        //Stuff from dovecotadm, quota, lastlogin over imap
+    }
 }
