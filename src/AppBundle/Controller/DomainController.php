@@ -13,10 +13,16 @@ class DomainController extends Controller
     /**
      * @Route("/domain", name="domain_homepage")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->findAll();
-        return $this->render('domain/index.html.twig', ['domains' => $domainRepo]);
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $domainRepo, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            2/*limit per page*/
+        );
+        return $this->render('domain/index.html.twig', ['domains' => $pagination]);
     }
 
     /**

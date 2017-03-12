@@ -40,7 +40,6 @@ class Domain
 
     /**
      * @ORM\Column(type="text")
-     * Assert\Url(checkDNS="true", protocols={""})
      * @CustomAssert\DomainName(checkDNS=true)
      */
     protected $name;

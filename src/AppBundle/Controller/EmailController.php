@@ -17,6 +17,7 @@ class EmailController extends Controller
     public function indexAction(Request $request)
     {
         $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->findAll();
+
         return $this->render('email/index.html.twig', ['domains' => $domainRepo]);
     }
 
