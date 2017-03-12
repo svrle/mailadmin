@@ -30,6 +30,8 @@ class EmailController extends Controller
         $form = $this->createForm(EmailType::class, $email);
         $form->handleRequest($request);
         if ($form->isValid()) {
+            $plaintext = $email->getPassword();
+            $email->setPassword(hash('sha512', $plaintext));
             $em = $this->getDoctrine()->getManager();
             $em->persist($email);
             $em->flush();
@@ -71,5 +73,26 @@ class EmailController extends Controller
         }
         return $this->render('email/new.html.twig', array('form' => $form->createView()));
 
+    }
+
+    /**
+     * @Route("/email/remove/{email}", name="email_remove", requirements={"email": "\d+"})
+     */
+    public function removeAction(Request $request, Email $email)
+    {
+        $emailRepo = $this->getDoctrine()->getRepository('AppBundle:Email')->find($email);
+
+        if(!$emailRepo)
+        {
+            throw $this->createNotFoundException(
+                'Wrong email name'
+            );
+        }else {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($emailRepo);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('email_homepage');
     }
 }
