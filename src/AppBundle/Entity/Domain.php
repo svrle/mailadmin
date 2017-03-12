@@ -17,6 +17,8 @@ class Domain
     public function __construct()
     {
         $this->emails = new ArrayCollection() ;
+        $this->aliases = new ArrayCollection() ;
+
     }
 
     public function getEmailCount()
@@ -58,6 +60,27 @@ class Domain
      * @ORM\Column(type="integer")
      */
     protected $defaultQuota;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Alias", mappedBy="domain", cascade={"persist"}, orphanRemoval=true)
+     */
+    protected $aliases;
+
+    /**
+     * @return mixed
+     */
+    public function getAliases()
+    {
+        return $this->aliases;
+    }
+
+    /**
+     * @param mixed $aliases
+     */
+    public function setAliases($aliases)
+    {
+        $this->aliases = $aliases;
+    }
 
 
     /**

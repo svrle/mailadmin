@@ -50,6 +50,27 @@ class Email
     protected $quota;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Alias", mappedBy="emails")
+     */
+    protected $alias;
+
+    /**
+     * @return mixed
+     */
+    public function getAlias()
+    {
+        return $this->alias;
+    }
+
+    /**
+     * @param mixed $alias
+     */
+    public function setAlias($alias)
+    {
+        $this->alias = $alias;
+    }
+
+    /**
      * @return mixed
      */
     public function getQuota()
