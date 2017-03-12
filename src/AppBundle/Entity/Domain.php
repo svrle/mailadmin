@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraints as CustomAssert;
 
 
 /**
@@ -40,6 +41,7 @@ class Domain
     /**
      * @ORM\Column(type="text")
      * Assert\Url(checkDNS="true", protocols={""})
+     * @CustomAssert\DomainName(checkDNS=true)
      */
     protected $name;
 
