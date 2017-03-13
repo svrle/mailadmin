@@ -62,28 +62,6 @@ class Domain
     protected $defaultQuota;
 
     /**
-     * @ORM\OneToMany(targetEntity="Alias", mappedBy="domain", cascade={"persist"}, orphanRemoval=true)
-     */
-    protected $aliases;
-
-    /**
-     * @return mixed
-     */
-    public function getAliases()
-    {
-        return $this->aliases;
-    }
-
-    /**
-     * @param mixed $aliases
-     */
-    public function setAliases($aliases)
-    {
-        $this->aliases = $aliases;
-    }
-
-
-    /**
      * @return mixed
      */
     public function getDefaultQuota()

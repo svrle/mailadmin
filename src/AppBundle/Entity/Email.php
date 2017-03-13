@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\DependencyInjection\Alias;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -25,12 +27,13 @@ class Email
     protected $id;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank(groups={"alias"})
      */
     protected $username;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $password;
 
@@ -45,30 +48,54 @@ class Email
     protected $surname;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $quota;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Alias", mappedBy="emails")
+     * @ORM\ManyToMany(targetEntity="Email", inversedBy="emails")
+     * @ORM\JoinTable(name="tbl_email_alias")
      */
-    protected $alias;
+    protected $aliases;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Email", mappedBy="aliases")
+     */
+    protected $emails;
 
     /**
      * @return mixed
      */
-    public function getAlias()
+    public function getEmails()
     {
-        return $this->alias;
+        return $this->emails;
     }
 
     /**
-     * @param mixed $alias
+     * @param mixed $emails
      */
-    public function setAlias($alias)
+    public function setEmails($emails)
     {
-        $this->alias = $alias;
+        $this->emails = $emails;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAliases()
+    {
+        return $this->aliases;
+    }
+
+    /**
+     * @param mixed $aliases
+     */
+    public function setAliases($aliases)
+    {
+        $this->aliases = $aliases;
+    }
+
+
 
     /**
      * @return mixed

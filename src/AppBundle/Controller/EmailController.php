@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Domain;
 use AppBundle\Entity\Email;
+use AppBundle\Form\AliasType;
 use AppBundle\Form\EmailType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -103,5 +104,32 @@ class EmailController extends Controller
     public function detailsAction(Request $request, Email $email)
     {
         //Stuff from dovecotadm, quota, lastlogin over imap
+    }
+
+    /**
+     * @Route("/alias/new/{domain}", name="alias_new", requirements={"domain": "\d+"})
+     */
+    public function newAliasAction(Request $request, Domain $domain)
+    {
+        // alias forms with validation group 'alias'
+        $alias = new Email();
+        $alias->setDomain($domain);
+        $form = $this->createForm(AliasType::class, $alias);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($alias);
+            $em->flush();
+            return $this->redirect($this->generateUrl('domain_homepage'));
+        }
+        return $this->render('alias/new.html.twig', array('form' => $form->createView()));
+    }
+
+    /**
+     * @Route("/alias/add/{email}", name="alias_add", requirements={"email": "\d+"})
+     */
+    public function addAliasAction(Request $request, Email $email)
+    {
+        //email to specific alias
     }
 }

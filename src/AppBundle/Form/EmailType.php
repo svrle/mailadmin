@@ -15,7 +15,6 @@ class EmailType extends AbstractType
             ->add('username')
             ->add('name')
             ->add('surname')
-
             ->add('password')
             ->add('quota')
             ->add('save', SubmitType::class)
