@@ -53,15 +53,15 @@ class Email
     protected $quota;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Email", inversedBy="emails")
-     * @ORM\JoinTable(name="tbl_email_alias")
-     */
-    protected $aliases;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Email", mappedBy="aliases")
+     * @ORM\ManyToMany(targetEntity="Email", inversedBy="aliases")
+     * @ORM\JoinTable(name="emails_aliases")
      */
     protected $emails;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Email", mappedBy="emails")
+     */
+    protected $aliases;
 
     /**
      * @return mixed
@@ -94,6 +94,7 @@ class Email
     {
         $this->aliases = $aliases;
     }
+
 
 
 

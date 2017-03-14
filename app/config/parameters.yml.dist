@@ -21,3 +21,4 @@ parameters:
     knp_per_page: 5
     mailer_user: svrle@example.net
     mailer_password: null
+    locales: en
