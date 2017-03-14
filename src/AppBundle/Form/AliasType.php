@@ -12,9 +12,9 @@ class AliasType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
-            ->add('emails')
-            ->add('save', SubmitType::class)
+            ->add('username', null, array('label' => 'alias.form.username'))
+            ->add('emails', null, array('label' => 'alias.form.emails'))
+            ->add('save', SubmitType::class, array('label' => 'alias.form.btn_save'))
         ;
     }
 

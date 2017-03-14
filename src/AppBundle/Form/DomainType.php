@@ -12,10 +12,10 @@ class DomainType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('defaultQuota', null, array('attr' => array('min' => 0, 'max' => 1024)))
-            ->add('emailNumbers', null, array('attr' => array('min' => 0, 'max' => 1024)))
-            ->add('save', SubmitType::class)
+            ->add('name', null, array('label' => 'domain.form.name'))
+            ->add('defaultQuota', null, array('attr' => array('min' => 0, 'max' => 1024), 'label' => 'domain.form.quota'))
+            ->add('emailNumbers', null, array('attr' => array('min' => 0, 'max' => 1024), 'label' => 'domain.form.email_numbers'))
+            ->add('save', SubmitType::class, array('label' => 'domain.form.btn_save'))
         ;
     }
 

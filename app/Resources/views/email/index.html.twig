@@ -10,7 +10,7 @@
                     {% for email in domain.emails %}
                         <ul>
                             <a href="{{ path('email_edit', { 'email': email.id }) }}">{{ email }}@{{ domain }}</a>
-                            - <a href="{{ path('email_remove', { 'email': email.id }) }}">del</a>
+                            - <a href="{{ path('email_remove', { 'email': email.id }) }}">{{ 'email.twig.btn_remove'|trans }}</a>
                         </ul>
                     {% endfor %}
                 {% endfor %}

@@ -1,3 +1,27 @@
 domain:
-  btn_edit: Edit
-  btn_email: Email
+  form:
+    name: Domain name
+    quota: Default quota per account
+    email_numbers: Number of allowed emails
+    btn_save: Create
+  twig:
+    btn_edit: Edit
+    btn_email: new email
+    btn_alias: new alias
+    btn_remove: del
+email:
+  form:
+    username: Email
+    name: Name
+    surname: Surname
+    password: Password
+    quota: Quota
+    btn_save: Create
+  twig:
+    btn_remove: del
+alias:
+  form:
+    username: Alias
+    emails: Emails
+    btn_save: Create
+  twig:

@@ -12,12 +12,12 @@ class EmailType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
-            ->add('name')
-            ->add('surname')
-            ->add('password')
-            ->add('quota')
-            ->add('save', SubmitType::class)
+            ->add('username', null, array('label' => 'email.form.username'))
+            ->add('name', null, array('label' => 'email.form.name'))
+            ->add('surname', null, array('label' => 'email.form.surname'))
+            ->add('password', null, array('label' => 'email.form.password'))
+            ->add('quota', null, array('label' => 'email.form.quota'))
+            ->add('save', SubmitType::class, array('label' => 'email.form.btn_save'))
         ;
     }
 
