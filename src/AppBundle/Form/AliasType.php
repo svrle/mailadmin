@@ -2,6 +2,7 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Email;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -13,7 +14,12 @@ class AliasType extends AbstractType
     {
         $builder
             ->add('username', null, array('label' => 'alias.form.username'))
-            ->add('emails', null, array('label' => 'alias.form.emails'))
+            ->add('emails', null, array('label' => 'alias.form.emails',
+                'class' => 'AppBundle\Entity\Email',
+                'query_builder' => function(EntityRepository $entityRepository) {
+                return $entityRepository->createQueryBuilder('o')
+                    ->where('o.domain = :domain')->setParameter('domain', '1');
+                }))
             ->add('save', SubmitType::class, array('label' => 'alias.form.btn_save'))
         ;
     }

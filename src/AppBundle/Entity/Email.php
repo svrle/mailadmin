@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\DomainRepository")
  * @ORM\Table(name="email")
  */
 class Email
