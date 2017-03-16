@@ -16,9 +16,11 @@ email:
     surname: Surname
     password: Password
     quota: Quota
+    alias: Alias
     btn_save: Create
   twig:
     btn_remove: del
+    alias_email: add email
 alias:
   form:
     username: Alias

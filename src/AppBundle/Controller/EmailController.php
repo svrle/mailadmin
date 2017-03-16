@@ -29,7 +29,7 @@ class EmailController extends Controller
     {
         $email = new Email();
         $email->setDomain($domain);
-        $form = $this->createForm(EmailType::class, $email);
+        $form = $this->createForm(EmailType::class, $email, array('email' => $email));
         $form->handleRequest($request);
         if ($form->isValid()) {
             $plaintext = $email->getPassword();
@@ -65,7 +65,7 @@ class EmailController extends Controller
                 'Wrong email name'
             );
         }
-        $form = $this->createForm(EmailType::class, $emailRepo);
+        $form = $this->createForm(EmailType::class, $emailRepo, array('email' => $email));
         $form->handleRequest($request);
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -114,7 +114,7 @@ class EmailController extends Controller
         // alias forms with validation group 'alias'
         $alias = new Email();
         $alias->setDomain($domain);
-        $form = $this->createForm(AliasType::class, $alias);
+        $form = $this->createForm(AliasType::class, $alias, array('domain' => $domain));
         $form->handleRequest($request);
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -131,5 +131,24 @@ class EmailController extends Controller
     public function addAliasAction(Request $request, Email $email)
     {
         //email to specific alias
+//        $alias->setDomain($domain);
+        $form = $this->createForm(AliasType::class, $email, array('domain' => $email->getDomain()));
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($email);
+            $em->flush();
+            return $this->redirect($this->generateUrl('domain_homepage'));
+        }
+        return $this->render(':alias:new.html.twig', array('form' => $form->createView()));    }
+
+    /**
+     * @Route("/alias", name="alias_homepage")
+     */
+    public function indexAliasAction(Request $request)
+    {
+        $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->findAll();
+
+        return $this->render('alias/index.html.twig', ['domains' => $domainRepo]);
     }
 }

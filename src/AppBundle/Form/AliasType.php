@@ -10,15 +10,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AliasType extends AbstractType
 {
+    protected $domain;
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $this->domain = $options['domain'];
         $builder
             ->add('username', null, array('label' => 'alias.form.username'))
             ->add('emails', null, array('label' => 'alias.form.emails',
                 'class' => 'AppBundle\Entity\Email',
                 'query_builder' => function(EntityRepository $entityRepository) {
                 return $entityRepository->createQueryBuilder('o')
-                    ->where('o.domain = :domain')->setParameter('domain', '1');
+                    ->where('o.domain = :domain')->setParameter('domain', $this->domain)
+                    ->andWhere('o.password is not null');
                 }))
             ->add('save', SubmitType::class, array('label' => 'alias.form.btn_save'))
         ;
@@ -28,7 +31,8 @@ class AliasType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => Email::class,
-            'validation_groups' => array('alias')
+            'validation_groups' => array('alias'),
+            'domain' => null
         ));
     }
 }
