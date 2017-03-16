@@ -32,7 +32,7 @@ class Domain
      */
     public function isNumberOfEmailsValid()
     {
-        if( $this->getEmailCount() <= $this->emailNumbers )
+        if( $this->getCountOnlyEmails() < $this->emailNumbers )
         {
             return true;
         } else {
@@ -57,9 +57,50 @@ class Domain
     protected $emailNumbers;
 
     /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
      * @ORM\Column(type="integer")
      */
     protected $defaultQuota;
+
+    protected $countOnlyEmails;
+
+    protected $countOnlyAliases;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $aliasNumbers;
+
+    /**
+     * @return mixed
+     */
+    public function getAliasNumbers()
+    {
+        return $this->aliasNumbers;
+    }
+
+    /**
+     * @param mixed $aliasNumbers
+     */
+    public function setAliasNumbers($aliasNumbers)
+    {
+        $this->aliasNumbers = $aliasNumbers;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCountOnlyAliases()
+    {
+        $this->countOnlyAliases = $this->getOnlyAliases();
+        return $this->countOnlyAliases;
+    }
 
     /**
      * @return mixed
@@ -101,6 +142,43 @@ class Domain
         return $this->emails;
     }
 
+
+    public function getOnlyEmails()
+    {
+        $emails = array();
+        foreach ($this->getEmails() as $email)
+        {
+            if($email->getPassword() != null )
+            {
+                $emails[] = $email;
+            }
+        }
+        return $emails;
+    }
+
+    public function getOnlyAliases()
+    {
+        $aliases = array();
+        foreach ($this->getEmails() as $alias)
+        {
+            if($alias->getPassword() == null )
+            {
+                $aliases[] = $alias;
+            }
+        }
+        return $aliases;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getCountOnlyEmails()
+    {
+        $this->countOnlyEmails = count($this->getOnlyEmails());
+        return $this->countOnlyEmails;
+    }
+
     /**
      * @param mixed $emails
      */
@@ -110,12 +188,7 @@ class Domain
     }
 
 
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+
 
     /**
      * @return mixed

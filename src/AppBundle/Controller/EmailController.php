@@ -27,6 +27,13 @@ class EmailController extends Controller
      */
     public function newAction(Request $request, Domain $domain)
     {
+
+        if($domain->isNumberOfEmailsValid() == false)
+        {
+            throw $this->createNotFoundException(
+                "You reach maximum number of emails for $domain"
+            );
+        }
         $email = new Email();
         $email->setDomain($domain);
         $form = $this->createForm(EmailType::class, $email, array('email' => $email));

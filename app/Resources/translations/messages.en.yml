@@ -3,6 +3,7 @@ domain:
     name: Domain name
     quota: Default quota per account
     email_numbers: Number of allowed emails
+    alias_numbers: Number of allowed aliases
     btn_save: Create
   twig:
     btn_edit: Edit

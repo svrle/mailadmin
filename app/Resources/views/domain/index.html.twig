@@ -4,7 +4,7 @@
         <div id="container">
                 {% for domain in domains %}
                     <a href="{{ path('email_list', { 'domain': domain.id }) }}">{{ domain.name }}</a>
-                    - {{ domain.emailCount }} / {{ domain.emailNumbers }}
+                    - {{ domain.countOnlyEmails }} / {{ domain.emailNumbers }}
                     - <a href="{{ path('domain_edit', {'domain': domain.id}) }}">{{ 'domain.twig.btn_edit'|trans }}</a>
                     - <a href="{{ path('email_new', { 'domain': domain.id }) }}">{{ 'domain.twig.btn_email'|trans }}</a>
                     - <a href="{{ path('alias_new', { 'domain': domain.id }) }}">{{ 'domain.twig.btn_alias'|trans }}</a>
