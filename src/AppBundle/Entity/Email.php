@@ -208,7 +208,14 @@ class Email
 
     public function __toString()
     {
-        return $this->getUsername();
+//        return $this->getUsername();
+        return $this->getFullEmail();
+
+    }
+
+    public function getFullEmail()
+    {
+        return $this->getUsername() . '@' . $this->getDomain();
     }
 
 

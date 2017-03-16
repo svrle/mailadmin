@@ -21,6 +21,7 @@ class EmailType extends AbstractType
             ->add('password', null, array('label' => 'email.form.password'))
             ->add('quota', null, array('label' => 'email.form.quota'))
             ->add('aliases', null, array('label' => 'email.form.alias',
+//                'choices' => $this->email->getFullEmail(),
                 'class' => 'AppBundle\Entity\Email',
                 'query_builder' => function(EntityRepository $entityRepository) {
                 return $entityRepository->createQueryBuilder('o')
