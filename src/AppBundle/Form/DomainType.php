@@ -27,6 +27,7 @@ class DomainType extends AbstractType
             ->add('defaultQuota', null, array('attr' => array('min' => 0, 'max' => 1024), 'label' => 'domain.form.quota'))
             ->add('emailNumbers', null, array('attr' => array('min' => 0, 'max' => 1024), 'label' => 'domain.form.email_numbers'))
             ->add('aliasNumbers', null, array('attr' => array('min' => 0, 'max' => 1024), 'label' => 'domain.form.alias_numbers'))
+            ->add('encryptions')
             ->add('save', SubmitType::class, array('label' => 'domain.form.btn_save'))
         ;
 

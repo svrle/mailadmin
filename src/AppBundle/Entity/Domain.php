@@ -20,6 +20,7 @@ class Domain
     {
         $this->emails = new ArrayCollection() ;
         $this->aliases = new ArrayCollection() ;
+        $this->encryptions = new ArrayCollection() ;
 
     }
 
@@ -88,6 +89,28 @@ class Domain
      * @ORM\Column(type="integer")
      */
     protected $aliasNumbers;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Encryption", inversedBy="domains")
+     *
+     */
+    protected $encryptions;
+
+    /**
+     * @return mixed
+     */
+    public function getEncryptions()
+    {
+        return $this->encryptions;
+    }
+
+    /**
+     * @param mixed $encryptions
+     */
+    public function setEncryptions($encryptions)
+    {
+        $this->encryptions = $encryptions;
+    }
 
     /**
      * @return mixed
