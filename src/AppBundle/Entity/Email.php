@@ -3,12 +3,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Entity\DomainRepository")
  * @ORM\Table(name="email")
+ * @UniqueEntity(fields={"username", "domain"})
  */
 class Email
 {
@@ -27,7 +29,7 @@ class Email
     protected $id;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(groups={"alias"})
      */
     protected $username;

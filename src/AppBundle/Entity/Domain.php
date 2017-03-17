@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
 
@@ -11,6 +12,7 @@ use AppBundle\Validator\Constraints as CustomAssert;
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Entity\DomainRepository")
  * @ORM\Table(name="domain")
+ * @UniqueEntity("name")
  */
 class Domain
 {
@@ -40,8 +42,18 @@ class Domain
         }
     }
 
+    public function isNumberOfAliasValid()
+    {
+        if( $this->getCountOnlyAliases() < $this->aliasNumbers )
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", unique=true, length=255)
      * @CustomAssert\DomainName(checkDNS=true)
      */
     protected $name;
@@ -98,7 +110,7 @@ class Domain
      */
     public function getCountOnlyAliases()
     {
-        $this->countOnlyAliases = $this->getOnlyAliases();
+        $this->countOnlyAliases = count($this->getOnlyAliases());
         return $this->countOnlyAliases;
     }
 

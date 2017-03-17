@@ -118,6 +118,12 @@ class EmailController extends Controller
      */
     public function newAliasAction(Request $request, Domain $domain)
     {
+        if($domain->isNumberOfAliasValid() == false)
+        {
+            throw $this->createNotFoundException(
+                "You reach maximum number of aliases for $domain"
+            );
+        }
         // alias forms with validation group 'alias'
         $alias = new Email();
         $alias->setDomain($domain);
@@ -127,7 +133,7 @@ class EmailController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($alias);
             $em->flush();
-            return $this->redirect($this->generateUrl('domain_homepage'));
+            return $this->redirect($this->generateUrl('alias_homepage'));
         }
         return $this->render('alias/new.html.twig', array('form' => $form->createView()));
     }
