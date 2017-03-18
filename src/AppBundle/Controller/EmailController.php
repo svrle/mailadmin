@@ -65,6 +65,7 @@ class EmailController extends Controller
      */
     public function editAction(Request $request, Email $email)
     {
+        //ToDo when edit email, can`t assign existing alias from choice box. That can be assigned only from Alias -> Add email
         $emailRepo = $this->getDoctrine()->getRepository('AppBundle:Email')->find($email);
         if(!$emailRepo)
         {
