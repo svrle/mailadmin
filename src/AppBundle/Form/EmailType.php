@@ -6,6 +6,8 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EmailType extends AbstractType
@@ -21,15 +23,48 @@ class EmailType extends AbstractType
             ->add('password', null, array('label' => 'email.form.password'))
             ->add('quota', null, array('label' => 'email.form.quota'))
             ->add('aliases', null, array('label' => 'email.form.alias',
-//                'choices' => $this->email->getFullEmail(),
                 'class' => 'AppBundle\Entity\Email',
                 'query_builder' => function(EntityRepository $entityRepository) {
-                return $entityRepository->createQueryBuilder('o')
+                $form = $entityRepository->createQueryBuilder('o')
                     ->where('o.domain = :domain')->setParameter('domain', $this->email->getDomain())
                     ->andWhere('o.quota is null');
+                    if($this->email->getId())
+                    {
+                        $form->andWhere('o != :thisEmail')->setParameter('thisEmail', $this->email);
+                    }
+                    return $form;
             }))
             ->add('save', SubmitType::class, array('label' => 'email.form.btn_save'))
         ;
+
+//        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+//            $object= $event->getData();
+//            $form = $event->getForm();
+//
+//            if ($object->getId() != null) {
+//                $form->add('aliases', null, array('label' => 'email.form.alias',
+////                'choices' => $this->email->getFullEmail(),
+//                    'class' => 'AppBundle\Entity\Email',
+//                    'query_builder' => function(EntityRepository $entityRepository) {
+//                        return $entityRepository->createQueryBuilder('o')
+//                            ->where('o.domain = :domain')->setParameter('domain', $this->email->getDomain())
+//                            ->andWhere('o.quota is null')
+//                    ->andWhere('o != :thisEmail')->setParameter('thisEmail', $this->email)
+//                            ;
+//                    }));
+//            }else{
+//                $form->add('aliases', null, array('label' => 'email.form.alias',
+////                'choices' => $this->email->getFullEmail(),
+//                    'class' => 'AppBundle\Entity\Email',
+//                    'query_builder' => function(EntityRepository $entityRepository) {
+//                        return $entityRepository->createQueryBuilder('o')
+//                            ->where('o.domain = :domain')->setParameter('domain', $this->email->getDomain())
+//                            ->andWhere('o.quota is null')
+////                    ->andWhere('o != :thisEmail')->setParameter('thisEmail', $this->email)
+//                            ;
+//                    }));
+//            }
+//        });
     }
 
     public function configureOptions(OptionsResolver $resolver)

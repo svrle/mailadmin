@@ -21,7 +21,8 @@ class AliasType extends AbstractType
                 'query_builder' => function(EntityRepository $entityRepository) {
                 return $entityRepository->createQueryBuilder('o')
                     ->where('o.domain = :domain')->setParameter('domain', $this->domain)
-                    ->andWhere('o.password is not null');
+                    ->andWhere('o.password is not null')
+                    ;
                 }))
             ->add('save', SubmitType::class, array('label' => 'alias.form.btn_save'))
         ;
