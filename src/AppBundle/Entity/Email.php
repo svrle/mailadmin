@@ -4,16 +4,73 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\DependencyInjection\Alias;
+use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping\AttributeOverrides;
+use Doctrine\ORM\Mapping\AttributeOverride;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Entity\DomainRepository")
  * @ORM\Table(name="email")
+ * @AttributeOverrides({
+ *     @AttributeOverride(name="email",
+ *         column=@ORM\Column(
+ *             name="email",
+ *             type="string",
+ *             length=255,
+ *             unique=false,
+ *             nullable=true
+ *         )
+ *     ),
+ *     @ORM\AttributeOverride(name="emailCanonical",
+ *          column=@ORM\Column(
+ *              name = "email_canonical",
+ *              nullable = true
+ *          )
+ *      ),
+ *     @ORM\AttributeOverride(name="password",
+ *          column=@ORM\Column(
+ *              name = "password",
+ *              nullable = true
+ *          )
+ *      ),
+ *     @ORM\AttributeOverride(name="username",
+ *          column=@ORM\Column(
+ *              name = "username",
+ *              nullable = true,
+ *              unique=false
+ *          )
+ *      ),
+ *     @ORM\AttributeOverride(name="usernameCanonical",
+ *          column=@ORM\Column(
+ *              name = "username_canonical",
+ *              nullable = true,
+ *              unique=false
+ *          )
+ *      )
+ * })
  * @UniqueEntity(fields={"username", "domain"})
  */
-class Email
+class Email extends BaseUser
 {
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
+
+    public function __toString()
+    {
+//        return $this->getUsername();
+        return $this->getFullEmail();
+
+    }
+
+    public function getFullEmail()
+    {
+        return $this->getUsername() . '@' . $this->getDomain();
+    }
+
 
     /**
      * @ORM\ManyToOne(targetEntity="Domain", inversedBy="emails", cascade={"persist"})
@@ -29,15 +86,15 @@ class Email
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(groups={"alias"})
+     * ORM\Column(type="string", length=255)
+     * Assert\NotBlank(groups={"alias"})
      */
-    protected $username;
+//    protected $username;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * ORM\Column(type="text", nullable=true)
      */
-    protected $password;
+//    protected $password;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -64,6 +121,7 @@ class Email
      * @ORM\ManyToMany(targetEntity="Email", mappedBy="emails")
      */
     protected $aliases;
+
 
     /**
      * @return mixed
@@ -155,18 +213,18 @@ class Email
     /**
      * @return mixed
      */
-    public function getPassword()
-    {
-        return $this->password;
-    }
+//    public function getPassword()
+//    {
+//        return $this->password;
+//    }
 
     /**
      * @param mixed $password
      */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    }
+//    public function setPassword($password)
+//    {
+//        $this->password = $password;
+//    }
 
     /**
      * @return mixed
@@ -195,30 +253,19 @@ class Email
     /**
      * @return mixed
      */
-    public function getUsername()
-    {
-        return $this->username;
-    }
+//    public function getUsername()
+//    {
+//        return $this->username;
+//    }
 
     /**
      * @param mixed $username
      */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
+//    public function setUsername($username)
+//    {
+//        $this->username = $username;
+//    }
 
-    public function __toString()
-    {
-//        return $this->getUsername();
-        return $this->getFullEmail();
-
-    }
-
-    public function getFullEmail()
-    {
-        return $this->getUsername() . '@' . $this->getDomain();
-    }
 
 
 }

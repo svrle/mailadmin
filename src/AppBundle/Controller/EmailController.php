@@ -15,7 +15,7 @@ class EmailController extends Controller
     /**
      * @Route("/email", name="email_homepage")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->findAll();
 
@@ -24,6 +24,9 @@ class EmailController extends Controller
 
     /**
      * @Route("/email/new/{domain}", name="email_new", requirements={"domain": "\d+"})
+     * @param Request $request
+     * @param Domain $domain
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request, Domain $domain)
     {
@@ -52,8 +55,10 @@ class EmailController extends Controller
 
     /**
      * @Route("/email/list/{domain}", name="email_list", requirements={"domain": "\d+"})
+     * @param Domain $domain
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction(Request $request, Domain $domain)
+    public function listAction(Domain $domain)
     {
         $emailRepo = $this->getDoctrine()->getRepository('AppBundle:Email')->findBy(array('domain' => $domain));
 
@@ -62,6 +67,9 @@ class EmailController extends Controller
 
     /**
      * @Route("/email/edit/{email}", name="email_edit", requirements={"email": "\d+"})
+     * @param Request $request
+     * @param Email $email
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction(Request $request, Email $email)
     {
@@ -87,8 +95,11 @@ class EmailController extends Controller
 
     /**
      * @Route("/email/remove/{email}", name="email_remove", requirements={"email": "\d+"})
+     * @param Email $email
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @internal param Request $request
      */
-    public function removeAction(Request $request, Email $email)
+    public function removeAction(Email $email)
     {
         $emailRepo = $this->getDoctrine()->getRepository('AppBundle:Email')->find($email);
 
@@ -108,6 +119,8 @@ class EmailController extends Controller
 
     /**
      * @Route("/email/details/{email}", name="email_details", requirements={"email": "\d+"})
+     * @param Request $request
+     * @param Email $email
      */
     public function detailsAction(Request $request, Email $email)
     {
@@ -116,6 +129,9 @@ class EmailController extends Controller
 
     /**
      * @Route("/alias/new/{domain}", name="alias_new", requirements={"domain": "\d+"})
+     * @param Request $request
+     * @param Domain $domain
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function newAliasAction(Request $request, Domain $domain)
     {
@@ -141,6 +157,9 @@ class EmailController extends Controller
 
     /**
      * @Route("/alias/add/{email}", name="alias_add", requirements={"email": "\d+"})
+     * @param Request $request
+     * @param Email $email
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function addAliasAction(Request $request, Email $email)
     {
@@ -158,8 +177,10 @@ class EmailController extends Controller
 
     /**
      * @Route("/alias", name="alias_homepage")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @internal param Request $request
      */
-    public function indexAliasAction(Request $request)
+    public function indexAliasAction()
     {
         $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->findAll();
 
