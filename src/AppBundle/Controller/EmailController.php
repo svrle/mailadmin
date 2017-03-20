@@ -205,19 +205,7 @@ class EmailController extends Controller
             // 3) Encode the password (you could also do this via Doctrine listener)
             $password = $this->get('app.sha512_crypt_encoder')
                 ->encodePassword($email->getPlainPassword(), $email->getSalt());
-//                ->encodePassword($email, $email->getSalt());
-
-//            $encoderFactory = $this->get('security.encoder_factory');
-//            $encoder = $encoderFactory->getEncoder($email);
-//            $salt = $email->getSalt();
-//            $password = $encoder->encodePassword('asdf', $salt);
-//
             $email->setPassword($password);
-//            $email->setPassword(password_hash('asdf', PASSWORD_SHA512, array('cost' => 13)));
-
-//            $encoder = $this->get('security.encoder_factory')->getEncoder($email);
-//            $password = $encoder->encodePassword('asdf', $email->getSalt());
-//            $email->setPassword($password);
 
             // 4) save the User!
             $em = $this->getDoctrine()->getManager();
@@ -232,7 +220,7 @@ class EmailController extends Controller
 
         return $this->render(
             'email/register.html.twig',
-            array('form' => $form->createView())
+            array('form' => $form->createView(), 'email' => $email)
         );
     }
 

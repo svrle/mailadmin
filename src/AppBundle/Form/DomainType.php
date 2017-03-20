@@ -18,16 +18,18 @@ class DomainType extends AbstractType
             $form = $event->getForm();
 
             if ($object->getId() != null) {
-                $form->add('name', null, array('disabled' => true));
+                $form->add('name', null, array('disabled' => true))
+                    ->add('encryptions', null, array('disabled' => true ));
             }else{
-                $form->add('name', null, array('label' => 'domain.form.name'));
+                $form->add('name', null, array('label' => 'domain.form.name'))
+                    ->add('encryptions');
             }
         });
         $builder
             ->add('defaultQuota', null, array('attr' => array('min' => 0, 'max' => 1024), 'label' => 'domain.form.quota'))
             ->add('emailNumbers', null, array('attr' => array('min' => 0, 'max' => 1024), 'label' => 'domain.form.email_numbers'))
             ->add('aliasNumbers', null, array('attr' => array('min' => 0, 'max' => 1024), 'label' => 'domain.form.alias_numbers'))
-            ->add('encryptions')
+
             ->add('save', SubmitType::class, array('label' => 'domain.form.btn_save'))
         ;
 

@@ -130,9 +130,9 @@ class Email implements UserInterface, \Serializable //, EncoderAwareInterface
     protected $aliases;
 
     /**
-     * @ORM\Column(type="string", length=60, unique=true)
+     * ORM\Column(type="string", length=60, unique=true)
      */
-    private $email;
+//    private $email;
 
     /**
      * @ORM\Column(type="string")
@@ -142,18 +142,18 @@ class Email implements UserInterface, \Serializable //, EncoderAwareInterface
     /**
      * @return mixed
      */
-    public function getEmail()
-    {
-        return $this->email;
-    }
+//    public function getEmail()
+//    {
+//        return $this->email;
+//    }
 
     /**
      * @param mixed $email
      */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
+//    public function setEmail($email)
+//    {
+//        $this->email = $email;
+//    }
 
     /**
      * @ORM\Column(name="is_active", type="boolean")
@@ -284,7 +284,6 @@ class Email implements UserInterface, \Serializable //, EncoderAwareInterface
     public function setPassword($password)
     {
         $this->password = $password;
-//        $this->password = crypt($password, '$6$rounds=5467$'. $this->getSalt() .'$');
     }
 
     /**
