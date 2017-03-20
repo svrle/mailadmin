@@ -4,6 +4,8 @@ parameters:
 #    parameter_name: value
 
 services:
+  app.sha512_crypt_encoder:
+          class: AppBundle\Security\Core\Encoder\Sha512CryptEncoder
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

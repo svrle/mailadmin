@@ -2,7 +2,9 @@
 # http://symfony.com/doc/current/security.html
 security:
     encoders:
-      FOS\UserBundle\Model\UserInterface: bcrypt
+      FOS\UserBundle\Model\UserInterface: sha512
+      AppBundle\Entity\Email:
+        id: app.sha512_crypt_encoder
     role_hierarchy:
       ROLE_ADMIN:       ROLE_USER
       ROLE_SUPER_ADMIN: ROLE_ADMIN
@@ -10,6 +12,12 @@ security:
     providers:
       fos_userbundle:
         id: fos_user.user_provider.username
+      email_client:
+        entity:
+          class: AppBundle:Email
+          property: username
+          # if you're using multiple entity managers
+          # manager_name: customer
 #        in_memory:
 #            memory: ~
 
@@ -24,6 +32,15 @@ security:
 
             logout:       true
             anonymous:    true
+
+        email:
+          pattern: ^/
+          http_basic: ~
+          provider: email_client
+#          anonymous: ~
+#          form_login:
+#            login_path: login
+#            check_path: login
 #    firewalls:
 #        # disables authentication for assets and the profiler, adapt it according to your needs
 #        dev:
@@ -45,6 +62,9 @@ security:
           - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
           - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
           - { path: ^/admin/, role: ROLE_ADMIN }
+#          - { path: ^/email/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#          - { path: ^/email/, roles: ROLE_CUSTOMER }
+
 #            anonymous: ~
             # activate different ways to authenticate
 

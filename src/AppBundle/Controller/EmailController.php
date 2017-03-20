@@ -9,6 +9,7 @@ use AppBundle\Form\EmailType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class EmailController extends Controller
 {
@@ -186,4 +187,53 @@ class EmailController extends Controller
 
         return $this->render('alias/index.html.twig', ['domains' => $domainRepo]);
     }
+
+    /**
+     * @Route("/email/register/{domain}", name="email_registration")
+     */
+    public function registerAction(Request $request, Domain $domain)
+    {
+        // 1) build the form
+        $email = new Email();
+        $email->setDomain($domain);
+        $form = $this->createForm(EmailType::class, $email, array('email' => $email));
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // 3) Encode the password (you could also do this via Doctrine listener)
+            $password = $this->get('app.sha512_crypt_encoder')
+                ->encodePassword($email->getPlainPassword(), $email->getSalt());
+//                ->encodePassword($email, $email->getSalt());
+
+//            $encoderFactory = $this->get('security.encoder_factory');
+//            $encoder = $encoderFactory->getEncoder($email);
+//            $salt = $email->getSalt();
+//            $password = $encoder->encodePassword('asdf', $salt);
+//
+            $email->setPassword($password);
+//            $email->setPassword(password_hash('asdf', PASSWORD_SHA512, array('cost' => 13)));
+
+//            $encoder = $this->get('security.encoder_factory')->getEncoder($email);
+//            $password = $encoder->encodePassword('asdf', $email->getSalt());
+//            $email->setPassword($password);
+
+            // 4) save the User!
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($email);
+            $em->flush();
+
+            // ... do any other work - like sending them an email, etc
+            // maybe set a "flash" success message for the user
+
+            return $this->redirectToRoute('email_homepage');
+        }
+
+        return $this->render(
+            'email/register.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
 }
