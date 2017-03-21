@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da56591b-2ee2-4810-884c-08461085078d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/domain/index.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/domain/index.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/EmailController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/EmailController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Email.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Email.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Form/EmailType.php" afterPath="$PROJECT_DIR$/src/AppBundle/Form/EmailType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,7 +35,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/domain/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
@@ -54,11 +50,23 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="48" lean-forward="false" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
+              <folding>
+                <element signature="e#105#115#0#Twig" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="EmailController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/EmailController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="92" column="111" lean-forward="false" selection-start-line="92" selection-start-column="111" selection-end-line="92" selection-end-column="111" />
+            <state relative-caret-position="206">
+              <caret line="191" column="62" lean-forward="false" selection-start-line="191" selection-start-column="54" selection-end-line="191" selection-end-column="62" />
               <folding>
                 <element signature="e#3457#3483#0#PHP" expanded="true" />
               </folding>
@@ -100,7 +108,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>countOnlyA</find>
       <find>isNum</find>
       <find>toman</find>
       <find>manyT</find>
@@ -130,6 +137,7 @@
       <find>$email</find>
       <find>private</find>
       <find>plainPa</find>
+      <find>registra</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -162,7 +170,6 @@
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/app/Resources/translation/messages.en.yml" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/EmailRepository.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/translations/messages.en.yml" />
         <option value="$PROJECT_DIR$/app/Resources/views/email/index.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/domain/listDetails.html.twig" />
@@ -185,6 +192,7 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Form/EmailType.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/Email.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/domain/index.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
       </list>
     </option>
   </component>
@@ -756,12 +764,12 @@
       <workItem from="1489939309508" duration="4113000" />
       <workItem from="1489968199629" duration="1991000" />
       <workItem from="1490035560723" duration="4237000" />
-      <workItem from="1490117057735" duration="1241000" />
+      <workItem from="1490117057735" duration="1547000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103729000" />
+    <option name="totallyTimeSpent" value="104035000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -830,13 +838,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Form/FormInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="209" column="43" lean-forward="false" selection-start-line="209" selection-start-column="36" selection-end-line="209" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bridge/Doctrine/Validator/Constraints/UniqueEntity.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -1099,6 +1100,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="7" column="38" lean-forward="false" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1151,24 +1153,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/EmailController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="92" column="111" lean-forward="false" selection-start-line="92" selection-start-column="111" selection-end-line="92" selection-end-column="111" />
-          <folding>
-            <element signature="e#3457#3483#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/email/register.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="7" column="32" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/translations/messages.en.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -1203,6 +1187,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/EmailController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="191" column="62" lean-forward="false" selection-start-line="191" selection-start-column="54" selection-end-line="191" selection-end-column="62" />
+          <folding>
+            <element signature="e#3457#3483#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/domain/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -1212,6 +1206,24 @@
             <element signature="e#453#464#0#Twig" expanded="true" />
             <element signature="e#573#591#0#Twig" expanded="true" />
             <element signature="e#703#712#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/email/register.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="7" column="32" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="48" lean-forward="false" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
+          <folding>
+            <element signature="e#105#115#0#Twig" expanded="true" />
           </folding>
         </state>
       </provider>
