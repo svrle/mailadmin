@@ -90,7 +90,7 @@ class EmailController extends Controller
             $em->flush();
             return $this->redirect($this->generateUrl('email_homepage'));
         }
-        return $this->render('email/new.html.twig', array('form' => $form->createView()));
+        return $this->render('email/register.html.twig', array('form' => $form->createView(), 'email' => $email));
 
     }
 

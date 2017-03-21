@@ -7,7 +7,7 @@
                     - (e) {{ domain.countOnlyEmails }} / {{ domain.emailNumbers }}
                     - (a) {{ domain.countOnlyAliases }} / {{ domain.aliasNumbers }}
                     - <a href="{{ path('domain_edit', {'domain': domain.id}) }}">{{ 'domain.twig.btn_edit'|trans }}</a>
-                    - <a href="{{ path('email_new', { 'domain': domain.id }) }}">{{ 'domain.twig.btn_email'|trans }}</a>
+                    - <a href="{{ path('email_registration', { 'domain': domain.id }) }}">{{ 'domain.twig.btn_email'|trans }}</a>
                     - <a href="{{ path('alias_new', { 'domain': domain.id }) }}">{{ 'domain.twig.btn_alias'|trans }}</a>
                     {% if domain.emailCount == 0 %}
                     - <a href="{{ path('domain_remove', { 'domain': domain.id }) }}" onclick="return confirm('are u sure?')">del</a>

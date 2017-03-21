@@ -104,12 +104,12 @@ class Email implements UserInterface, \Serializable //, EncoderAwareInterface
     protected $password;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $name;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $surname;
 
@@ -161,7 +161,7 @@ class Email implements UserInterface, \Serializable //, EncoderAwareInterface
     private $isActive;
 
     /**
-     * @Assert\NotBlank()
+     * Assert\NotBlank()
      * @Assert\Length(max=4096)
      */
     private $plainPassword;

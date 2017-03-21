@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType as OriginType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EmailType extends AbstractType
@@ -17,25 +19,14 @@ class EmailType extends AbstractType
     protected $email;
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
-//        $builder
-////            ->add('email', OriginType::class)
-//            ->add('username', TextType::class)
+        $this->email = $options['email'];
+        $builder
+            ->add('username', null, array('label' => 'email.form.username'))
 //            ->add('plainPassword', RepeatedType::class, array(
 //                'type' => PasswordType::class,
 //                'first_options'  => array('label' => 'Password'),
 //                'second_options' => array('label' => 'Repeat Password'),
 //            ))
-//        ;
-
-        $this->email = $options['email'];
-        $builder
-            ->add('username', null, array('label' => 'email.form.username'))
-            ->add('plainPassword', RepeatedType::class, array(
-                'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
-            ))
             ->add('name', null, array('label' => 'email.form.name'))
             ->add('surname', null, array('label' => 'email.form.surname'))
             ->add('quota', null, array('label' => 'email.form.quota'))
@@ -51,9 +42,28 @@ class EmailType extends AbstractType
                     }
                     return $form;
             }))
-//            ->add('save', SubmitType::class, array('label' => 'email.form.btn_save'))
         ;
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $object= $event->getData();
+            $form = $event->getForm();
 
+            if ($object->getId() != null) {
+                $form->add('plainPassword', RepeatedType::class, array(
+                    'type' => PasswordType::class,
+                    'first_options'  => array('label' => 'Password', 'required' => false),
+                    'second_options' => array('label' => 'Repeat Password', 'required' => false),
+                    'required' => false,
+                    'mapped' => false,
+                    'empty_data' => null
+                ));
+            }else{
+                $form->add('plainPassword', RepeatedType::class, array(
+                    'type' => PasswordType::class,
+                    'first_options'  => array('label' => 'Password'),
+                    'second_options' => array('label' => 'Repeat Password'),
+                ));
+            }
+        });
 //        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
 //            $object= $event->getData();
 //            $form = $event->getForm();
