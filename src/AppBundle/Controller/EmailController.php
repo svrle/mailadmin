@@ -9,6 +9,7 @@ use AppBundle\Form\EmailType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -42,6 +43,7 @@ class EmailController extends Controller
             );
         }
         $email = new Email();
+
         $email->setDomain($domain);
         $form = $this->createForm(EmailType::class, $email, array('email' => $email));
         $form->handleRequest($request);
@@ -198,6 +200,7 @@ class EmailController extends Controller
     {
         // 1) build the form
         $email = new Email();
+
         $email->setDomain($domain);
         $form = $this->createForm(EmailType::class, $email, array('email' => $email));
 
