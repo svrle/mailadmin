@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,6 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class PostfixInstance
 {
+    public function __construct()
+    {
+        $this->domains = new ArrayCollection() ;
+    }
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -41,6 +47,27 @@ class PostfixInstance
      * @ORM\Column(type="text")
      */
     protected $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Domain", mappedBy="postfixInstance", cascade={"persist"}, orphanRemoval=true)
+     */
+    protected $domains;
+
+    /**
+     * @return mixed
+     */
+    public function getDomains()
+    {
+        return $this->domains;
+    }
+
+    /**
+     * @param mixed $domains
+     */
+    public function setDomains($domains)
+    {
+        $this->domains = $domains;
+    }
 
     /**
      * @return mixed
