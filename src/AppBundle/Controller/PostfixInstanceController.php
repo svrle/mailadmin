@@ -19,14 +19,14 @@ class PostfixInstanceController extends Controller
      */
     public function indexAction(Request $request)
     {
-//        $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->findAll();
-//        $paginator  = $this->get('knp_paginator');
-//        $pagination = $paginator->paginate(
-//            $domainRepo, /* query NOT result */
-//            $request->query->getInt('page', 1)/*page number*/,
-//            $this->getParameter('knp_per_page')/*limit per page*/
-//        );
-//        return $this->render('domain/index.html.twig', ['domains' => $pagination]);
+        $postfixRepo = $this->getDoctrine()->getRepository('AppBundle:PostfixInstance')->findAll();
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $postfixRepo, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            $this->getParameter('knp_per_page')/*limit per page*/
+        );
+        return $this->render('postfixInstance/index.html.twig', ['postfixes' => $pagination]);
     }
 
     /**
