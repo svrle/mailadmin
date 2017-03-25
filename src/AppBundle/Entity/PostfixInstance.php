@@ -29,9 +29,9 @@ class PostfixInstance
         $processBuilder = new ProcessBuilder();
         $processBuilder->setPrefix('/usr/bin/cp');
         $processBuilder->setArguments(array('-rp', '/etc/postfix/', '~/', $this->getName()));
-        $processBuilder->getProcess()->getCommandLine();
+//        $processBuilder->getProcess();
 
-        $process = new Process($processBuilder);
+        $process = new Process($processBuilder->getProcess());
         $process->run();
     }
 

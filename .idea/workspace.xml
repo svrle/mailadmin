@@ -50,8 +50,8 @@
       <file leaf-file-name="PostfixInstance.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/PostfixInstance.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="34" column="24" lean-forward="false" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
+            <state relative-caret-position="293">
+              <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -778,12 +778,12 @@
       <workItem from="1490382562158" duration="872000" />
       <workItem from="1490383824051" duration="1490000" />
       <workItem from="1490423643397" duration="590000" />
-      <workItem from="1490430604594" duration="5039000" />
+      <workItem from="1490430604594" duration="5320000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="117881000" />
+    <option name="totallyTimeSpent" value="118162000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1223,8 +1223,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/PostfixInstance.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="34" column="24" lean-forward="false" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
+        <state relative-caret-position="293">
+          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding />
         </state>
       </provider>
