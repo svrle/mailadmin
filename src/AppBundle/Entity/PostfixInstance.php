@@ -54,6 +54,28 @@ class PostfixInstance
     protected $domains;
 
     /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Property", inversedBy="postfixInstances")
+     * @ORM\JoinTable(name="postfixInstance_property")
+     */
+    private $properties;
+
+    /**
+     * @return mixed
+     */
+    public function getProperties()
+    {
+        return $this->properties;
+    }
+
+    /**
+     * @param mixed $properties
+     */
+    public function setProperties($properties)
+    {
+        $this->properties = $properties;
+    }
+
+    /**
      * @return mixed
      */
     public function getDomains()
