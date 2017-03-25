@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\PostfixInstance;
+use AppBundle\Form\PostfixInstanceType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,10 +36,21 @@ class PostfixInstanceController extends Controller
      */
     public function newAction(Request $request)
     {
-        $process = new Process('ls -lsa');
-        $process->start();
 
-        array_filter( explode("\n", $process->getOutput()), 'strlen');
+        $postfixInstance = new PostfixInstance();
+        $form = $this->createForm(PostfixInstanceType::class, $postfixInstance);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($postfixInstance);
+            $em->flush();
+            $postfixInstance->createFolderStructure();
+            return $this->redirect($this->generateUrl('postfix_homepage'));
+        }
+        return $this->render('postfixInstance/new.html.twig', array('form' => $form->createView()));
+//        $process = new Process('ls -lsa');
+//        $process->start();
+//        array_filter( explode("\n", $process->getOutput()), 'strlen');
 
 
 //        foreach ($process as $type => $data) {

@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\ProcessBuilder;
 
 /**
  * @ORM\Entity
@@ -16,6 +18,20 @@ class PostfixInstance
         $this->domains = new ArrayCollection() ;
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    public function createFolderStructure()
+    {
+//        $this->
+        $process = new ProcessBuilder();
+        $process->setPrefix('/usr/bin/cp');
+        $process->setArguments(array('-rp', '/etc/postfix/', '~/', $this->getName()));
+        $process->getProcess()->run();
+    }
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -24,27 +40,17 @@ class PostfixInstance
     protected $id;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string")
      */
     protected $ip;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string")
      */
     protected $hostname;
 
     /**
-     * @ORM\Column(type="text")
-     */
-    protected $username;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    protected $sshkey;
-
-    /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string")
      */
     protected $name;
 
@@ -110,38 +116,6 @@ class PostfixInstance
     /**
      * @return mixed
      */
-    public function getSshkey()
-    {
-        return $this->sshkey;
-    }
-
-    /**
-     * @param mixed $sshkey
-     */
-    public function setSshkey($sshkey)
-    {
-        $this->sshkey = $sshkey;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * @param mixed $username
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getHostname()
     {
         return $this->hostname;
@@ -179,13 +153,5 @@ class PostfixInstance
     {
         return $this->id;
     }
-
-
-
-//    public function __toString()
-//    {
-//        return $this->getUsername();
-//    }
-
 
 }

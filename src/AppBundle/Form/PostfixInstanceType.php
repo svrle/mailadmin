@@ -13,7 +13,9 @@ class PostfixInstanceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-//            ->add('name')
+            ->add('ip')
+            ->add('hostname')
+            ->add('name')
 //            ->add('defaultQuota', null, array('attr' => array('min' => 0, 'max' => 1024)))
 //            ->add('emailNumbers', null, array('attr' => array('min' => 0, 'max' => 1024)))
             ->add('save', SubmitType::class)
