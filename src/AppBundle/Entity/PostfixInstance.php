@@ -26,10 +26,13 @@ class PostfixInstance
     public function createFolderStructure()
     {
 //        $this->
-        $process = new ProcessBuilder();
-        $process->setPrefix('/usr/bin/cp');
-        $process->setArguments(array('-rp', '/etc/postfix/', '~/', $this->getName()));
-        $process->getProcess()->run();
+        $processBuilder = new ProcessBuilder();
+        $processBuilder->setPrefix('/usr/bin/cp');
+        $processBuilder->setArguments(array('-rp', '/etc/postfix/', '~/', $this->getName()));
+        $processBuilder->getProcess()->getCommandLine();
+
+        $process = new Process($processBuilder);
+        $process->run();
     }
 
     /**
