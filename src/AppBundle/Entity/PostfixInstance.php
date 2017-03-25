@@ -31,7 +31,7 @@ class PostfixInstance
         $processBuilder->setArguments(array('-rp', '/etc/postfix/', '~/', $this->getName()));
 //        $processBuilder->getProcess();
 
-        $process = new Process($processBuilder->getProcess());
+        $process = new Process('/usr/bin/cp -rp /etc/postfix/ ~/' . $this->getName());
         $process->run();
     }
 
