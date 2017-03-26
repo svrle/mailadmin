@@ -43,6 +43,27 @@ class Property
     protected $value;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $isNew;
+
+    /**
+     * @return mixed
+     */
+    public function getIsNew()
+    {
+        return $this->isNew;
+    }
+
+    /**
+     * @param mixed $isNew
+     */
+    public function setIsNew($isNew)
+    {
+        $this->isNew = $isNew;
+    }
+
+    /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\PostfixInstance", mappedBy="properties")
      */
     private $postfixInstances;

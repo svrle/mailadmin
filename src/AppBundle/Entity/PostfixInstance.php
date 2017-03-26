@@ -23,18 +23,46 @@ class PostfixInstance
         return $this->name;
     }
 
+    // first
     public function createFolderStructure()
     {
-//        $this->
-        $processBuilder = new ProcessBuilder();
-        $processBuilder->setPrefix('/usr/bin/cp');
-        $processBuilder->setArguments(array('-rp', '/etc/postfix/', '~/', $this->getName()));
-//        $processBuilder->getProcess();
+        $processBuilder = (new ProcessBuilder())
+            ->setPrefix('/usr/bin/cp')
+            ->add('/etc/postfix')
+            ->add('/etc/postfix-' . $this->getName());
 
         $process = $processBuilder->getProcess();
         $process->run();
-//        $process = new Process('/usr/bin/cp -rp /etc/postfix/ ~/' . $this->getName());
-//        $process->run();
+    }
+
+    //second
+    /**
+     * Need to set configuration of main.cf before creating spool structure and activate instance
+     *
+     * # DNS name of second IP address
+    inet_interfaces = squeezel2.squeezel.com
+    myhostname = squeezel2.squeezel.com
+    queue_directory = /var/spool/postfix2
+    # Inform 2nd instance of other version
+    alternative_config_directories = /etc/postfix
+    smtp_bind_address = 192.168.1.81
+    # Separate Logging
+    syslog_name=postfix2
+    # Make sure settings go to /etc/postfix2
+    transport_maps = hash:/etc/postfix2/transport
+
+     */
+
+    // third
+    public function createSpoolStructure()
+    {
+        $processBuilder = (new ProcessBuilder())
+            ->setPrefix('/usr/bin/mkdir')
+            ->add('-p')
+            ->add('/var/spool/postfix-' . $this->getName());
+
+        $process = $processBuilder->getProcess();
+        $process->run();
     }
 
     /**

@@ -41,10 +41,10 @@ class PostfixInstanceController extends Controller
         $form = $this->createForm(PostfixInstanceType::class, $postfixInstance);
         $form->handleRequest($request);
         if ($form->isValid()) {
+            $postfixInstance->createFolderStructure();
             $em = $this->getDoctrine()->getManager();
             $em->persist($postfixInstance);
             $em->flush();
-            $postfixInstance->createFolderStructure();
             return $this->redirect($this->generateUrl('postfix_homepage'));
         }
         return $this->render('postfixInstance/new.html.twig', array('form' => $form->createView()));

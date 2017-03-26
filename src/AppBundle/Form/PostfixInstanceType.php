@@ -16,8 +16,6 @@ class PostfixInstanceType extends AbstractType
             ->add('ip')
             ->add('hostname')
             ->add('name')
-//            ->add('defaultQuota', null, array('attr' => array('min' => 0, 'max' => 1024)))
-//            ->add('emailNumbers', null, array('attr' => array('min' => 0, 'max' => 1024)))
             ->add('save', SubmitType::class)
         ;
     }
