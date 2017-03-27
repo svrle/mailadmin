@@ -7,11 +7,9 @@ use AppBundle\Entity\Property;
 use AppBundle\Form\PostfixInstanceType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Process\Exception\ProcessFailedException;
-use Symfony\Component\Process\Process;
-use Symfony\Component\Process\ProcessBuilder;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -21,6 +19,8 @@ class PostfixInstanceController extends Controller
 {
     /**
      * @Route("/postfix", name="postfix_homepage")
+     * @param Request $request
+     * @return Response
      */
     public function indexAction(Request $request)
     {
@@ -36,15 +36,12 @@ class PostfixInstanceController extends Controller
 
     /**
      * @Route("/postfix/new", name="postfix_new")
+     * @param Request $request
+     * @return RedirectResponse|Response
      */
     public function newAction(Request $request)
     {
-//        $prop1 = new Property();
-//        $prop2 = new Property();
         $yaml = Yaml::parse(file_get_contents(__DIR__.'/../../../app/config/postfix.yml'));
-//        echo '<pre>';
-//        print_r($yaml);
-//        die;
         $postfixInstance = new PostfixInstance();
         foreach ($yaml['default'] as $key => $value) {
             $property = new Property();

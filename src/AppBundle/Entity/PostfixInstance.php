@@ -4,8 +4,6 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Process\Process;
-use Symfony\Component\Process\ProcessBuilder;
 
 /**
  * @ORM\Entity
@@ -63,16 +61,16 @@ class PostfixInstance
     }
 
     // first
-    public function createFolderStructure()
-    {
-        $processBuilder = (new ProcessBuilder())
-            ->setPrefix('/usr/bin/cp')
-            ->add('/etc/postfix')
-            ->add('/etc/postfix-' . $this->getName());
-
-        $process = $processBuilder->getProcess();
-        $process->run();
-    }
+//    public function createFolderStructure()
+//    {
+//        $processBuilder = (new ProcessBuilder())
+//            ->setPrefix('/usr/bin/cp')
+//            ->add('/etc/postfix')
+//            ->add('/etc/postfix-' . $this->getName());
+//
+//        $process = $processBuilder->getProcess();
+//        $process->run();
+//    }
 
     //second
     /**
@@ -93,16 +91,16 @@ class PostfixInstance
      */
 
     // third
-    public function createSpoolStructure()
-    {
-        $processBuilder = (new ProcessBuilder())
-            ->setPrefix('/usr/bin/mkdir')
-            ->add('-p')
-            ->add('/var/spool/postfix-' . $this->getName());
-
-        $process = $processBuilder->getProcess();
-        $process->run();
-    }
+//    public function createSpoolStructure()
+//    {
+//        $processBuilder = (new ProcessBuilder())
+//            ->setPrefix('/usr/bin/mkdir')
+//            ->add('-p')
+//            ->add('/var/spool/postfix-' . $this->getName());
+//
+//        $process = $processBuilder->getProcess();
+//        $process->run();
+//    }
 
     /**
      * @return mixed

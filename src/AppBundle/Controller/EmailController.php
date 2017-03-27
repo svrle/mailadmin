@@ -8,9 +8,9 @@ use AppBundle\Form\AliasType;
 use AppBundle\Form\EmailType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @Route("/admin")
@@ -31,7 +31,7 @@ class EmailController extends Controller
      * @Route("/email/new/{domain}", name="email_new", requirements={"domain": "\d+"})
      * @param Request $request
      * @param Domain $domain
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function newAction(Request $request, Domain $domain)
     {
@@ -62,7 +62,7 @@ class EmailController extends Controller
     /**
      * @Route("/email/list/{domain}", name="email_list", requirements={"domain": "\d+"})
      * @param Domain $domain
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function listAction(Domain $domain)
     {
@@ -75,7 +75,7 @@ class EmailController extends Controller
      * @Route("/email/edit/{email}", name="email_edit", requirements={"email": "\d+"})
      * @param Request $request
      * @param Email $email
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function editAction(Request $request, Email $email)
     {
@@ -102,7 +102,7 @@ class EmailController extends Controller
     /**
      * @Route("/email/remove/{email}", name="email_remove", requirements={"email": "\d+"})
      * @param Email $email
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      * @internal param Request $request
      */
     public function removeAction(Email $email)
@@ -137,7 +137,7 @@ class EmailController extends Controller
      * @Route("/alias/new/{domain}", name="alias_new", requirements={"domain": "\d+"})
      * @param Request $request
      * @param Domain $domain
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function newAliasAction(Request $request, Domain $domain)
     {
@@ -165,7 +165,7 @@ class EmailController extends Controller
      * @Route("/alias/add/{email}", name="alias_add", requirements={"email": "\d+"})
      * @param Request $request
      * @param Email $email
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function addAliasAction(Request $request, Email $email)
     {
@@ -183,7 +183,7 @@ class EmailController extends Controller
 
     /**
      * @Route("/alias", name="alias_homepage")
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      * @internal param Request $request
      */
     public function indexAliasAction()
@@ -195,6 +195,9 @@ class EmailController extends Controller
 
     /**
      * @Route("/email/register/{domain}", name="email_registration")
+     * @param Request $request
+     * @param Domain $domain
+     * @return RedirectResponse|Response
      */
     public function registerAction(Request $request, Domain $domain)
     {

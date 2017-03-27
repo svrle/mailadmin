@@ -6,7 +6,9 @@ use AppBundle\Entity\Domain;
 use AppBundle\Form\DomainType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/admin")
@@ -15,6 +17,8 @@ class DomainController extends Controller
 {
     /**
      * @Route("/domain", name="domain_homepage")
+     * @param Request $request
+     * @return Response
      */
     public function indexAction(Request $request)
     {
@@ -30,6 +34,8 @@ class DomainController extends Controller
 
     /**
      * @Route("/domain/new", name="domain_new")
+     * @param Request $request
+     * @return RedirectResponse|Response
      */
     public function newAction(Request $request)
     {
@@ -48,6 +54,9 @@ class DomainController extends Controller
 
     /**
      * @Route("/domain/edit/{domain}", name="domain_edit", requirements={"domain": "\d+"})
+     * @param Request $request
+     * @param Domain $domain
+     * @return RedirectResponse|Response
      */
     public function editAction(Request $request, Domain $domain)
     {
@@ -72,8 +81,11 @@ class DomainController extends Controller
 
     /**
      * @Route("/domain/remove/{domain}", name="domain_remove", requirements={"domain": "\d+"})
+     * @param Domain $domain
+     * @return RedirectResponse
+     * @internal param Request $request
      */
-    public function removeAction(Request $request, Domain $domain)
+    public function removeAction(Domain $domain)
     {
         $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->find($domain);
 

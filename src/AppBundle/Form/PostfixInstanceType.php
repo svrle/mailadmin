@@ -1,7 +1,6 @@
 <?php
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Alias;
 use AppBundle\Entity\PostfixInstance;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;

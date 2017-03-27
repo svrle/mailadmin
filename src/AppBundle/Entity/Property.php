@@ -78,7 +78,8 @@ class Property
     }
 
     /**
-     * @param mixed $postfixInstances
+     * @param PostfixInstance $postfixInstance
+     * @internal param mixed $postfixInstances
      */
     public function addPostfixInstance(PostfixInstance $postfixInstance)
     {
