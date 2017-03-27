@@ -3,13 +3,16 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\PostfixInstance;
+use AppBundle\Entity\Property;
 use AppBundle\Form\PostfixInstanceType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessBuilder;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * @Route("/admin")
@@ -36,8 +39,25 @@ class PostfixInstanceController extends Controller
      */
     public function newAction(Request $request)
     {
-
+//        $prop1 = new Property();
+//        $prop2 = new Property();
+        $yaml = Yaml::parse(file_get_contents(__DIR__.'/../../../app/config/postfix.yml'));
+//        echo '<pre>';
+//        print_r($yaml);
+//        die;
         $postfixInstance = new PostfixInstance();
+        foreach ($yaml['default'] as $key => $value) {
+            $property = new Property();
+            $property->setName($key);
+            $property->setType($value['type']);
+            $property->setValue($value['value']);
+
+            $postfixInstance->addProperty($property);
+        }
+
+
+//        $postfixInstance->setProperties(array($prop1, $prop2));
+//        $postfixInstance->setProperties(array());
         $form = $this->createForm(PostfixInstanceType::class, $postfixInstance);
         $form->handleRequest($request);
         if ($form->isValid()) {

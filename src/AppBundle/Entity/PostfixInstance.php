@@ -13,9 +13,48 @@ use Symfony\Component\Process\ProcessBuilder;
  */
 class PostfixInstance
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $ip;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $hostname;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Domain", mappedBy="postfixInstance", cascade={"persist"}, orphanRemoval=true)
+     */
+    protected $domains;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Property", inversedBy="postfixInstances")
+     * @ORM\JoinTable(name="postfixInstance_property")
+     */
+    private $properties;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $isSingleInstance;
+
     public function __construct()
     {
         $this->domains = new ArrayCollection() ;
+        $this->properties = new ArrayCollection();
     }
 
     public function __toString()
@@ -66,37 +105,20 @@ class PostfixInstance
     }
 
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @return mixed
      */
-    protected $id;
+    public function getIsSingleInstance()
+    {
+        return $this->isSingleInstance;
+    }
 
     /**
-     * @ORM\Column(type="string")
+     * @param mixed $isSingleInstance
      */
-    protected $ip;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $hostname;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $name;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Domain", mappedBy="postfixInstance", cascade={"persist"}, orphanRemoval=true)
-     */
-    protected $domains;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Property", inversedBy="postfixInstances")
-     * @ORM\JoinTable(name="postfixInstance_property")
-     */
-    private $properties;
+    public function setIsSingleInstance($isSingleInstance)
+    {
+        $this->isSingleInstance = $isSingleInstance;
+    }
 
     /**
      * @return mixed
@@ -185,6 +207,22 @@ class PostfixInstance
     public function getId()
     {
         return $this->id;
+    }
+
+    public function addProperty(Property $property)
+    {
+        if(!$this->properties->contains($property)) {
+            $this->properties->add($property);
+            $property->addPostfixInstance($this);
+        }
+    }
+
+    public function removeProperty(Property $property)
+    {
+        if($this->properties->contains($property)) {
+            $this->properties->removeElement($property);
+            $property->removePostfixInstance($this);
+        }
     }
 
 }

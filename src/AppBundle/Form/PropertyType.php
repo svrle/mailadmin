@@ -1,31 +1,28 @@
 <?php
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Alias;
-use AppBundle\Entity\PostfixInstance;
+use AppBundle\Entity\Property;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PostfixInstanceType extends AbstractType
+class PropertyType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('ip')
-            ->add('hostname')
             ->add('name')
-            ->add('properties', CollectionType::class, array('entry_type' => PropertyType::class))
-            ->add('save', SubmitType::class)
+            ->add('value')
+
+//            ->add('save', SubmitType::class)
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => PostfixInstance::class,
+            'data_class' => Property::class,
         ));
     }
 }

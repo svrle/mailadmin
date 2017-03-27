@@ -13,6 +13,7 @@ class Property
 {
     public function __construct()
     {
+        $this->postfixInstances = new ArrayCollection();
     }
 
     public function __toString()
@@ -79,9 +80,20 @@ class Property
     /**
      * @param mixed $postfixInstances
      */
-    public function setPostfixInstances($postfixInstances)
+    public function addPostfixInstance(PostfixInstance $postfixInstance)
     {
-        $this->postfixInstances = $postfixInstances;
+        if(!$this->postfixInstances->contains($postfixInstance)) {
+            $postfixInstance->addProperty($this);
+            $this->postfixInstances->add($postfixInstance);
+        }
+    }
+
+    public function removePostfixInstance(PostfixInstance $postfixInstance)
+    {
+        if($this->postfixInstances->contains($postfixInstance)) {
+            $this->postfixInstances->removeElement($postfixInstance);
+            $postfixInstance->removeProperty($this);
+        }
     }
 
     /**
@@ -139,7 +151,6 @@ class Property
     {
         return $this->id;
     }
-
 
 
 
