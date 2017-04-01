@@ -1,7 +1,62 @@
 {% extends 'base.html.twig' %}
+
+{% form_theme form _self %}
+{%- block form_widget -%}
+    {% for child in form %}
+        {% if value.type == 'string1' %}
+            {% if label is not same as(false) -%}
+                {% if not compound -%}
+                    {% set label_attr = label_attr|merge({'for': id}) %}
+                {%- endif -%}
+                {% if required -%}
+                    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+                {%- endif -%}
+                {% if label is empty -%}
+                    {%- if label_format is not empty -%}
+                        {% set label = label_format|replace({
+                        '%name%': name,
+                        '%id%': id,
+                        }) %}
+                    {%- else -%}
+                        {% set label = value.name|humanize %}
+                        {% set label_origin = value.name %}
+                    {%- endif -%}
+                {%- endif -%}
+                <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }} ( {{ label_origin }} )</label>
+            {%- endif -%}
+
+            {%- set type = type|default('text') -%}
+            <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value.value }}" {% endif %}/>
+
+        {% endif %}
+        {#{{ dump(value.type) }}#}
+    {% endfor %}
+
+    {#{% if data.name == 'asdf' %}#}
+        {#string#}
+    {#{% endif %}#}
+    {#{{ dump(data) }}#}
+{%- endblock form_widget -%}
+
 {% block body %}
+    {#{{ dump(form.properties.vars.value) }}#}
+
+
+    {#{{ dump(form.properties[0].vars.value.type) }}#}
+    {#{% for property in form.properties %}#}
+        {#{{ dump(property.vars.value.type) }}#}
+    {#{% endfor %}#}
+
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {#{{ form_widget(form) }}#}
+    {% for property in form.properties %}
+        {#{{ form_label(property.type) }}#}
+        {#{{ form_row(property.value) }}#}
+        {#{{ form_row(property.type) }}#}
+
+        {{ form_widget(property) }}
+    {% endfor %}
+    {{ form_rest(form) }}
     {{ form_end(form) }}
 {% endblock %}
 

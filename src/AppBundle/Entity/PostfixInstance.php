@@ -39,13 +39,13 @@ class PostfixInstance
     protected $domains;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Property", inversedBy="postfixInstances")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Property", inversedBy="postfixInstances", cascade={"persist"})
      * @ORM\JoinTable(name="postfixInstance_property")
      */
     private $properties;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     protected $isSingleInstance;
 

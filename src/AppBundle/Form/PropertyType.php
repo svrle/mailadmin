@@ -12,6 +12,7 @@ class PropertyType extends AbstractType
     {
         $builder
             ->add('name')
+//            ->add('type')
             ->add('value')
 
 //            ->add('save', SubmitType::class)

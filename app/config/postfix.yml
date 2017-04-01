@@ -3,7 +3,7 @@ default:
     type: string
     value: postmaster
   access_map_defer_code:
-    type: string
+    type: string1
     value: 450
   alias_database:
     type: string

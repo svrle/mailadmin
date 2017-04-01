@@ -48,36 +48,21 @@ class PostfixInstanceController extends Controller
             $property->setName($key);
             $property->setType($value['type']);
             $property->setValue($value['value']);
+//            $property->getIsNew(true);
 
             $postfixInstance->addProperty($property);
         }
 
-
-//        $postfixInstance->setProperties(array($prop1, $prop2));
-//        $postfixInstance->setProperties(array());
         $form = $this->createForm(PostfixInstanceType::class, $postfixInstance);
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $postfixInstance->createFolderStructure();
+//            $postfixInstance->createFolderStructure();
             $em = $this->getDoctrine()->getManager();
             $em->persist($postfixInstance);
             $em->flush();
             return $this->redirect($this->generateUrl('postfix_homepage'));
         }
         return $this->render('postfixInstance/new.html.twig', array('form' => $form->createView()));
-//        $process = new Process('ls -lsa');
-//        $process->start();
-//        array_filter( explode("\n", $process->getOutput()), 'strlen');
-
-
-//        foreach ($process as $type => $data) {
-//            if ($process::OUT === $type) {
-////                echo "\nRead from stdout: ".$data;
-//
-//            } else { // $process::ERR === $type
-//                echo "\nRead from stderr: ".$data;
-//            }
-//        }
     }
 
 }

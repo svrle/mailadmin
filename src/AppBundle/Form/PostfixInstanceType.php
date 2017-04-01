@@ -16,7 +16,8 @@ class PostfixInstanceType extends AbstractType
             ->add('ip')
             ->add('hostname')
             ->add('name')
-            ->add('properties', CollectionType::class, array('entry_type' => PropertyType::class))
+            ->add('properties', CollectionType::class, array('entry_type' => PropertyType::class,
+                'by_reference' => false))
             ->add('save', SubmitType::class)
         ;
     }
