@@ -6,6 +6,11 @@ parameters:
 services:
   app.sha512_crypt_encoder:
           class: AppBundle\Security\Core\Encoder\Sha512CryptEncoder
+
+  app.property_type_extension:
+          class: AppBundle\Form\Extension\PropertyTypeExtension
+          tags:
+              - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\TextType }
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
