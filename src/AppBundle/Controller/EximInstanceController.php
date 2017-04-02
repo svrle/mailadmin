@@ -25,14 +25,16 @@ class EximInstanceController extends Controller
      */
     public function indexAction(Request $request)
     {
-//        $postfixRepo = $this->getDoctrine()->getRepository('AppBundle:PostfixInstance')->findAll();
-//        $paginator  = $this->get('knp_paginator');
-//        $pagination = $paginator->paginate(
-//            $postfixRepo, /* query NOT result */
-//            $request->query->getInt('page', 1)/*page number*/,
-//            $this->getParameter('knp_per_page')/*limit per page*/
-//        );
-//        return $this->render('postfixInstance/index.html.twig', ['postfixes' => $pagination]);
+        $yaml = Yaml::parse(file_get_contents(__DIR__.'/../../../app/config/exim.yml'));
+        $exims = array();
+        foreach ($yaml['default'] as $key => $value) {
+            $eximInstance = new EximInstance();
+            $exims[] = $eximInstance;
+            $eximInstance->name = $key;
+            $eximInstance->type = $value['type'];
+            $eximInstance->value = $value['value'];
+        }
+        return $this->render('eximInstance/index.html.twig', ['exims' => $exims]);
     }
 
     /**
@@ -42,27 +44,20 @@ class EximInstanceController extends Controller
      */
     public function newAction(Request $request)
     {
-        $yaml = Yaml::parse(file_get_contents(__DIR__.'/../../../app/config/postfix.yml'));
         $eximInstance = new EximInstance();
-        foreach ($yaml['default'] as $key => $value) {
-//            $property = new Property();
-//            $property->setName($key);
-//            $property->setType($value['type']);
-//            $property->setValue($value['value']);
-////            $property->getIsNew(true);
-
-//            $postfixInstance->addProperty($property);
-        }
 
         $form = $this->createForm(EximInstanceType::class, $eximInstance);
         $form->handleRequest($request);
         if ($form->isValid()) {
-//            $postfixInstance->createFolderStructure();
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($eximInstance);
-            $em->flush();
-            return $this->redirect($this->generateUrl('postfix_homepage'));
+            $exim = array(
+                $eximInstance->name => array(
+                    'value' => $eximInstance->value,
+                    'type' => $eximInstance->type
+                )
+            );
+            
+            return $this->redirect($this->generateUrl('exim_homepage'));
         }
-        return $this->render('postfixInstance/new.html.twig', array('form' => $form->createView()));
+        return $this->render('eximInstance/new.html.twig', array('form' => $form->createView()));
     }
 }

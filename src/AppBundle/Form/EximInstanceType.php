@@ -12,8 +12,8 @@ class EximInstanceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('ip')
-            ->add('hostname')
+            ->add('type')
+            ->add('value')
             ->add('name')
             ->add('save', SubmitType::class)
         ;

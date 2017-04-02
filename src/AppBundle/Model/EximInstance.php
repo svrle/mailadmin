@@ -8,17 +8,17 @@ class EximInstance
     /**
      * ORM\Column(type="string")
      */
-    protected $ip;
+    public $value;
 
     /**
      * ORM\Column(type="string")
      */
-    protected $hostname;
+    public $type;
 
     /**
      * ORM\Column(type="string")
      */
-    protected $name;
+    public $name;
 
 
     public function __construct()

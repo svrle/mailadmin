@@ -3,9 +3,11 @@
     <div id="wrapper">
         <div id="container">
                 {% for exim in exims %}
-                   <a href="{{ path('exim_edit', { 'eximInstance': exim.id }) }}">{{ exim.name }}</a><br \>
+                   {{ exim.name }}<br \>
+                    {{ exim.type }}<br \>
+                    {{ exim.value }}<br \>
+                    <hr \>
                 {% endfor %}
-            {{ knp_pagination_render(postfixes) }}
         </div>
     </div>
 {% endblock %}
