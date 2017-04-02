@@ -8,3 +8,6 @@ default:
   alias_database:
     type: string
     value: hash:/etc/aliases
+  address_verify_cache_cleanup_interval:
+     type: string
+     value: 12h

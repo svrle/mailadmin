@@ -1,0 +1,13 @@
+default:
+  tls_on_connect_ports:
+    type: string
+    value: 465
+  timeout_frozen_after:
+    type: string1
+    value: 5d
+  system_filter:
+    type: string
+    value: /etc/cpanel_exim_system_filter
+  tls_dh_max_bits:
+     type: string
+     value: 2236

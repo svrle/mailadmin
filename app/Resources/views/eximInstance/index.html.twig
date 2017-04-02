@@ -2,8 +2,8 @@
 {% block body %}
     <div id="wrapper">
         <div id="container">
-                {% for postfix in postfixes %}
-                   <a href="{{ path('postfix_edit', { 'postfixInstance': postfix.id }) }}">{{ postfix.name }}</a><br \>
+                {% for exim in exims %}
+                   <a href="{{ path('exim_edit', { 'eximInstance': exim.id }) }}">{{ exim.name }}</a><br \>
                 {% endfor %}
             {{ knp_pagination_render(postfixes) }}
         </div>

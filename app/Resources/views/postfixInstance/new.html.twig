@@ -13,10 +13,6 @@
     {{ form_start(form) }}
     {#{{ form_widget(form) }}#}
     {% for property in form.properties %}
-        {#{{ form_label(property.type) }}#}
-        {#{{ form_row(property.value) }}#}
-        {#{{ form_row(property.type) }}#}
-
         {{ form_widget(property) }}
     {% endfor %}
     {{ form_rest(form) }}
