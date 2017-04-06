@@ -2,6 +2,8 @@
 
 namespace AppBundle\Model;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 class EximInstance
 {
@@ -11,7 +13,7 @@ class EximInstance
     public $value;
 
     /**
-     * ORM\Column(type="string")
+     * @Assert\Type("integer")
      */
     public $type;
 

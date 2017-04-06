@@ -72,20 +72,22 @@ class PostfixInstanceController extends Controller
      * @Route("/postfix/edit/{postfixInstance}", name="postfix_edit", requirements={"postfixInstance": "\d+"})
      */
     public function editAction(Request $request, PostfixInstance $postfixInstance) {
-
+//
 //        echo '<pre>';
-        foreach ( $postfixInstance->getProperties() as $property) {
-            echo $property . '<br \>';
-        }
+//        echo 'saved: <br />';
+//        foreach ( $postfixInstance->getProperties() as $property) {
+//            echo $property . '<br \>';
+//        }
+
         $form = $this->createForm(PostfixInstanceType::class, $postfixInstance);
         $form->handleRequest($request);
         if ($form->isValid()) {
-//            $postfixInstance->createFolderStructure();
             $em = $this->getDoctrine()->getManager();
             $em->persist($postfixInstance);
             $em->flush();
             return $this->redirect($this->generateUrl('postfix_homepage'));
         }
+
         return $this->render('postfixInstance/new.html.twig', array('form' => $form->createView()));
     }
 

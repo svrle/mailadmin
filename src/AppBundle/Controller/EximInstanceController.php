@@ -55,7 +55,7 @@ class EximInstanceController extends Controller
                     'type' => $eximInstance->type
                 )
             );
-            
+
             return $this->redirect($this->generateUrl('exim_homepage'));
         }
         return $this->render('eximInstance/new.html.twig', array('form' => $form->createView()));

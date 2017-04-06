@@ -3,10 +3,12 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="property")
  */
 class Property
@@ -19,6 +21,18 @@ class Property
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @param PreUpdateEventArgs $event
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate(PreUpdateEventArgs $event)
+    {
+        if ($event->hasChangedField('value')) {
+            // Do something when the username is changed.
+            $this->isNew = true;
+        }
     }
 
     /**
