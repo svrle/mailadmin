@@ -22,7 +22,7 @@ class PostfixProcess extends ProcessBuilder
     {
         $processBuilder = (new ProcessBuilder())
             ->setPrefix('sudo')
-            ->setPrefix('/usr/bin/cp')
+            ->add('/usr/bin/cp')
             ->add('-R')
             ->add('/etc/postfix')
             ->add('/etc/postfix-' . $postfix->getName());
