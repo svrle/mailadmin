@@ -30,14 +30,13 @@ class Property
     public function preUpdate(PreUpdateEventArgs $event)
     {
         if ($event->hasChangedField('value')) {
-            // Do something when the username is changed.
             $this->isNew = true;
         }
     }
 
     public function populateDescriptionFromYaml(array $yaml)
     {
-        foreach ($yaml['default'] as $key => $value) {
+        foreach ($yaml['main'] as $key => $value) {
             if( $key == $this->getName() ) {
                 $this->setDescription($value['description']);
             }

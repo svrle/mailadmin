@@ -1,13 +1,19 @@
 {% extends 'base.html.twig' %}
+
+
 {% block body %}
-    <div id="wrapper">
-        <div id="container">
-                {% for postfix in postfixes %}
-                   <a href="{{ path('postfix_edit', { 'postfixInstance': postfix.id }) }}">{{ postfix.name }}</a><br \>
-                {% endfor %}
-            {{ knp_pagination_render(postfixes) }}
-        </div>
-    </div>
+
+    <p>{{ postfix }}</p><br />
+    # ==========================================================================<br />
+    # service type  private(yes) unpriv(yes)  chroot(yes)  wakeup(never)  maxproc(100) command + args<br />
+    # ==========================================================================<br />
+    {% for service in postfix.services %}
+        {{ service }} {{ service.type }} {{ service.private }} {{ service.unpriv }} {{ service.chroot }} {{ service.wakeup }} {{ service.maxproc }} {{ service.command }} <a href="{{ path('postfix_edit_service', { 'service': service.id }) }}">edit</a> <br />
+    {% endfor %}
+    <p />
+    {{ form_start(form) }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
 {% endblock %}
 
 {% block stylesheets %}

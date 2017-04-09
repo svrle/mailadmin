@@ -1,4 +1,4 @@
-default:
+main:
   2bounce_notice_recipient:
     type: string
     value: postmaster

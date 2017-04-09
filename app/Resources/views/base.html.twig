@@ -4,18 +4,24 @@
 <a href="{{ path('domain_homepage') }}">Domain</a> - <a href="{{ path('domain_new') }}">new</a> <br />
 <a href="{{ path('email_homepage') }}">Email</a><br />
 <a href="{{ path('alias_homepage') }}">Alias</a><br />
-<a href="{{ path('postfix_homepage') }}">Postfix Instance</a> - <a href="{{ path('postfix_new') }}">new</a><br />
+<a href="{{ path('postfix_new') }}">Postfix Instance</a> - <a href="{{ path('postfix_new') }}">new</a><br />
 
 {% endblock %}
 {#{% block title %}Yourapp{% endblock %}#}
 <html>
     <head>
-        <link rel="stylesheet"
-              href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+        {% stylesheets
+        'assets/vendor/bootstrap/css/bootstrap.min.css'
+        filter='cssrewrite' output='css/compiled/app.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        {#<link rel="stylesheet"#}
+              {#href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">#}
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
     </head>
     <body>
         {% block body %}{% endblock %}

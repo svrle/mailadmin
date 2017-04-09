@@ -48,10 +48,16 @@ class PostfixInstance
      */
     private $properties;
 
+
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Domain", mappedBy="instance")
+     * @ORM\OneToMany(targetEntity="Service", mappedBy="postfixInstance", cascade={"persist"}, orphanRemoval=true)
      */
-    private $domains;
+    protected $services;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Domain", mappedBy="postfixInstance", cascade={"persist"}, orphanRemoval=true)
+     */
+    protected $domains;
 
     /**
      * @return mixed
@@ -64,19 +70,26 @@ class PostfixInstance
     /**
      * @param mixed $domains
      */
-//    public function setDomains($domains)
-//    {
-//        $this->domains = $domains;
-//    }
-    public function addDomain(Domain $domain)
+    public function setDomains($domains)
     {
-        die;
-        if(!$this->domains->contains($domain)) {
-            $this->domains->add($domain);
-            $domain->setInstance($this);
-        }
+        $this->domains = $domains;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getServices()
+    {
+        return $this->services;
+    }
+
+    /**
+     * @param mixed $services
+     */
+    public function setServices($services)
+    {
+        $this->services = $services;
+    }
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -86,7 +99,8 @@ class PostfixInstance
     public function __construct()
     {
         $this->properties = new ArrayCollection();
-        $this->domains = new ArrayCollection();
+        $this->services = new ArrayCollection() ;
+        $this->domains = new ArrayCollection() ;
     }
 
     public function __toString()
@@ -230,9 +244,5 @@ class PostfixInstance
         }
     }
 
-    public function doProcess()
-    {
-        $process = new PostfixProcess($this);
-    }
 
 }

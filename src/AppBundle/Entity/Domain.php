@@ -97,25 +97,25 @@ class Domain
     protected $encryptions;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PostfixInstance", inversedBy="domains")
-     * @ORM\JoinColumn(name="instance_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="PostfixInstance", inversedBy="domains", cascade={"persist"})
+     * @ORM\JoinColumn(name="postfixInstance_id", referencedColumnName="id", onDelete="cascade")
      */
-    private $instance;
+    protected $postfixInstance;
 
     /**
      * @return mixed
      */
-    public function getInstance()
+    public function getPostfixInstance()
     {
-        return $this->instance;
+        return $this->postfixInstance;
     }
 
     /**
-     * @param mixed $instance
+     * @param mixed $postfixInstance
      */
-    public function setInstance($instance)
+    public function setPostfixInstance($postfixInstance)
     {
-        $this->instance = $instance;
+        $this->postfixInstance = $postfixInstance;
     }
 
     /**

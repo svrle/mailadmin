@@ -18,17 +18,8 @@ class PostfixInstanceType extends AbstractType
             ->add('name')
             ->add('domains')
 
-            ->add('properties', CollectionType::class, array('entry_type' => PropertyType::class,
-                'by_reference' => false))
-//            ->add('userdomains', null, array(
-//                'class' => 'AppBundle\Entity\Domain',
-//                'query_builder' => function(EntityRepository $entityRepository) {
-//                    return $entityRepository->createQueryBuilder('o')
-//                        ->where('o.postfixInstance is null')
-////                        ->andWhere('o.postfixInstance = :postfix')->setParameter('postfix', $this)
-//                        ;
-//                }
-//                ))
+//            ->add('properties', CollectionType::class, array('entry_type' => PropertyType::class,
+//                'by_reference' => false))
             ->add('save', SubmitType::class)
         ;
     }
