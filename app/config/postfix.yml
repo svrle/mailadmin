@@ -2,12 +2,37 @@ default:
   2bounce_notice_recipient:
     type: string
     value: postmaster
+    description: |
+     The recipient of undeliverable mail that cannot be returned to the sender. This feature is enabled with the notify_classes parameter.
   access_map_defer_code:
-    type: string1
+    type: int
     value: 450
+    description:  |
+     The numerical Postfix SMTP server response code for an access(5) map "defer" action, including "defer_if_permit" or "defer_if_reject". Prior to Postfix 2.6, the response is hard-coded as "450".
+
+                   Do not change this unless you have a complete understanding of RFC 5321.
+
+                   This feature is available in Postfix 2.6 and later.
   alias_database:
     type: string
     value: hash:/etc/aliases
+    description:  |
+     The alias databases for local(8) delivery that are updated with "newaliases" or with "sendmail -bi".
+
+                   This is a separate configuration parameter because not all the tables specified with $alias_maps have to be local files.
+
+                   Examples:
+
+                   alias_database = hash:/etc/aliases
+                   alias_database = hash:/etc/mail/aliases
   address_verify_cache_cleanup_interval:
      type: string
      value: 12h
+     description:  |
+      The amount of time between verify(8) address verification database cleanup runs. This feature requires that the database supports the "delete" and "sequence" operators. Specify a zero interval to disable database cleanup.
+
+                    After each database cleanup run, the verify(8) daemon logs the number of entries that were retained and dropped. A cleanup run is logged as "partial" when the daemon terminates early after "postfix reload", "postfix stop", or no requests for $max_idle seconds.
+
+                    Time units: s (seconds), m (minutes), h (hours), d (days), w (weeks).
+
+                    This feature is available in Postfix 2.7.

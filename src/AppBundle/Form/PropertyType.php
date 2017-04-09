@@ -14,6 +14,7 @@ class PropertyType extends AbstractType
         $builder
             ->add('value', TextType::class, array('property_value' => 'value',
                 'property_name' => 'name',
+                'property_description' => 'description',
                 'label' => false))
 //            ->add('type')
 //            ->add('value')

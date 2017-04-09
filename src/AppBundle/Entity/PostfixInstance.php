@@ -2,12 +2,20 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Controller\PostfixInstanceController;
+use AppBundle\Process\PostfixProcess;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="postfix")
+ * @UniqueEntity("ip")
+ * @UniqueEntity("hostname")
+ * @UniqueEntity("name")
  */
 class PostfixInstance
 {
@@ -19,24 +27,20 @@ class PostfixInstance
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      */
     protected $ip;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      */
     protected $hostname;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      */
     protected $name;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Domain", mappedBy="postfixInstance", cascade={"persist"}, orphanRemoval=true)
-     */
-    protected $domains;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Property", inversedBy="postfixInstances", cascade={"persist"})
@@ -45,32 +49,50 @@ class PostfixInstance
     private $properties;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Domain", mappedBy="instance")
+     */
+    private $domains;
+
+    /**
+     * @return mixed
+     */
+    public function getDomains()
+    {
+        return $this->domains;
+    }
+
+    /**
+     * @param mixed $domains
+     */
+//    public function setDomains($domains)
+//    {
+//        $this->domains = $domains;
+//    }
+    public function addDomain(Domain $domain)
+    {
+        die;
+        if(!$this->domains->contains($domain)) {
+            $this->domains->add($domain);
+            $domain->setInstance($this);
+        }
+    }
+
+
+    /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     protected $isSingleInstance;
 
     public function __construct()
     {
-        $this->domains = new ArrayCollection() ;
         $this->properties = new ArrayCollection();
+        $this->domains = new ArrayCollection();
     }
 
     public function __toString()
     {
         return $this->name;
     }
-
-    // first
-//    public function createFolderStructure()
-//    {
-//        $processBuilder = (new ProcessBuilder())
-//            ->setPrefix('/usr/bin/cp')
-//            ->add('/etc/postfix')
-//            ->add('/etc/postfix-' . $this->getName());
-//
-//        $process = $processBuilder->getProcess();
-//        $process->run();
-//    }
 
     //second
     /**
@@ -134,21 +156,6 @@ class PostfixInstance
         $this->properties = $properties;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDomains()
-    {
-        return $this->domains;
-    }
-
-    /**
-     * @param mixed $domains
-     */
-    public function setDomains($domains)
-    {
-        $this->domains = $domains;
-    }
 
     /**
      * @return mixed
@@ -221,6 +228,11 @@ class PostfixInstance
             $this->properties->removeElement($property);
             $property->removePostfixInstance($this);
         }
+    }
+
+    public function doProcess()
+    {
+        $process = new PostfixProcess($this);
     }
 
 }

@@ -30,7 +30,7 @@ class PropertyTypeExtension extends AbstractTypeExtension
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefined(array('property_value', 'property_name'));
+        $resolver->setDefined(array('property_value', 'property_name', 'property_description'));
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)
@@ -60,6 +60,20 @@ class PropertyTypeExtension extends AbstractTypeExtension
 
             // set an "image_url" variable that will be available when rendering this field
             $view->vars['property_name'] = $propertyName;
+        }
+
+        //description
+        if (isset($options['property_description'])) {
+            $parentData = $form->getParent()->getData();
+
+            $propertyDescription = null;
+            if (null !== $parentData) {
+                $accessor = PropertyAccess::createPropertyAccessor();
+                $propertyDescription = $accessor->getValue($parentData, $options['property_description']);
+            }
+
+            // set an "image_url" variable that will be available when rendering this field
+            $view->vars['property_description'] = $propertyDescription;
         }
     }
 }

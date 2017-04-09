@@ -35,6 +35,15 @@ class Property
         }
     }
 
+    public function populateDescriptionFromYaml(array $yaml)
+    {
+        foreach ($yaml['default'] as $key => $value) {
+            if( $key == $this->getName() ) {
+                $this->setDescription($value['description']);
+            }
+        }
+    }
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -58,9 +67,27 @@ class Property
     protected $value;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=false)
      */
     protected $isNew;
+
+    protected $description;
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
 
     /**
      * @return mixed

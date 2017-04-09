@@ -48,7 +48,8 @@ class PostfixInstanceController extends Controller
             $property->setName($key);
             $property->setType($value['type']);
             $property->setValue($value['value']);
-//            $property->getIsNew(true);
+            $property->setDescription($value['description']);
+            $property->setIsNew(true);
 
             $postfixInstance->addProperty($property);
         }
@@ -60,6 +61,9 @@ class PostfixInstanceController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($postfixInstance);
             $em->flush();
+//            echo $postfixInstance->getDomains();
+//            die;
+            $postfixInstance->doProcess();
             return $this->redirect($this->generateUrl('postfix_homepage'));
         }
         return $this->render('postfixInstance/new.html.twig', array('form' => $form->createView()));
@@ -71,13 +75,12 @@ class PostfixInstanceController extends Controller
      * @return RedirectResponse|Response
      * @Route("/postfix/edit/{postfixInstance}", name="postfix_edit", requirements={"postfixInstance": "\d+"})
      */
-    public function editAction(Request $request, PostfixInstance $postfixInstance) {
-//
-//        echo '<pre>';
-//        echo 'saved: <br />';
-//        foreach ( $postfixInstance->getProperties() as $property) {
-//            echo $property . '<br \>';
-//        }
+    public function editAction(Request $request, PostfixInstance $postfixInstance)
+    {
+        $yaml = Yaml::parse(file_get_contents(__DIR__.'/../../../app/config/postfix.yml'));
+        foreach ($postfixInstance->getProperties() as $property) {
+            $property->populateDescriptionFromYaml($yaml);
+        }
 
         $form = $this->createForm(PostfixInstanceType::class, $postfixInstance);
         $form->handleRequest($request);
