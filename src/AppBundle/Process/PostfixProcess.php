@@ -21,7 +21,7 @@ class PostfixProcess extends ProcessBuilder
     public function createStructure(PostfixInstance $postfix)
     {
         $processBuilder = (new ProcessBuilder())
-            ->setPrefix('/usr/bin/cp')
+            ->setPrefix('/usr/bin/cp -R')
             ->add('/etc/postfix')
             ->add('/etc/postfix-' . $postfix->getName());
 
