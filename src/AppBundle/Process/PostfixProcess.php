@@ -15,7 +15,7 @@ class PostfixProcess extends ProcessBuilder
 {
     public function __construct(PostfixInstance $postfixInstance)
     {
-        $this->createStructure($postfixInstance->getName());
+        $this->createStructure($postfixInstance);
     }
 
     public function createStructure(PostfixInstance $postfix)
