@@ -73,6 +73,43 @@ class Property
     protected $description;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Service", inversedBy="properties", cascade={"persist"})
+     * @ORM\JoinColumn(name="service_id", referencedColumnName="id", onDelete="cascade")
+     */
+    protected $service;
+
+    /**
+     * @return mixed
+     */
+    public function getService()
+    {
+        return $this->service;
+    }
+
+    /**
+     * @param mixed $service
+     */
+    public function setService($service)
+    {
+        $this->service = $service;
+    }
+//    public function addService(Service $service)
+//    {
+//        if(!$this->service->contains($property)) {
+//            $property->addService($this);
+//            $this->properties->add($property);
+//        }
+//    }
+//
+//    public function removeProperty(Property $property)
+//    {
+//        if($this->properties->contains($property)) {
+//            $this->properties->removeElement($property);
+//            $property->removeService($this);
+//        }
+//    }
+
+    /**
      * @return mixed
      */
     public function getDescription()

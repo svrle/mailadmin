@@ -36,7 +36,8 @@
         "knplabs/knp-paginator-bundle": "^2.5",
         "symfony/process": "^3.2",
 	"twitter/bootstrap": "3.*",
-	"components/jquery": "1.11.1"
+	"components/jquery": "1.11.1",
+        "braincrafted/bootstrap-bundle": "@stable"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

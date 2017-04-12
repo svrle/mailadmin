@@ -1,0 +1,25 @@
+{
+  "name": "www",
+  "homepage": "https://github.com/svrle/mailadmin",
+  "authors": [
+    "Nenad Grgic <svrle@Grgas-MacBook-Pro.local>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "1.10.2",
+    "Ink": "2.2.1",
+    "select2": "3.4.3",
+    "jquery.cookie": "1.4.0"
+  }
+}

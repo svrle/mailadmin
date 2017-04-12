@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Service
@@ -14,6 +15,11 @@ class Service
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function __construct()
+    {
+        $this->properties = new ArrayCollection() ;
     }
 
     /**
@@ -68,6 +74,42 @@ class Service
      * @ORM\JoinColumn(name="postfixInstance_id", referencedColumnName="id", onDelete="cascade")
      */
     protected $postfixInstance;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Property", mappedBy="service", cascade={"persist"}, orphanRemoval=true)
+     */
+    protected $properties;
+
+    /**
+     * @return mixed
+     */
+    public function getProperties()
+    {
+        return $this->properties;
+    }
+
+    /**
+     * @param mixed $properties
+     */
+//    public function setProperties($properties)
+//    {
+//        $this->properties = $properties;
+//    }
+    public function addProperty(Property $property)
+    {
+        if(!$this->properties->contains($property)) {
+            $property->setService($this);
+            $this->properties->add($property);
+        }
+    }
+
+    public function removeProperty(Property $property)
+    {
+        if($this->properties->contains($property)) {
+            $this->properties->removeElement($property);
+//            $property->removeService($this);
+        }
+    }
 
     /**
      * @return mixed

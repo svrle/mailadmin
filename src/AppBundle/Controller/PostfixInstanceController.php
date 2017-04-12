@@ -38,7 +38,6 @@ class PostfixInstanceController extends Controller
      */
     public function newAction(Request $request)
     {
-
         //Index
         $postfixRepo = $this->getDoctrine()->getRepository('AppBundle:PostfixInstance')->findAll();
         $paginator  = $this->get('knp_paginator');
@@ -50,6 +49,10 @@ class PostfixInstanceController extends Controller
 
         $yaml = Yaml::parse(file_get_contents(__DIR__.'/../../../app/config/postfix.yml'));
         $postfixInstance = new PostfixInstance();
+
+        if(count($postfixRepo) >= 10) {
+            $postfixInstance->setIsSingleInstance(true);
+        }
         foreach ($yaml['main'] as $key => $value) {
             $property = new Property();
             $property->setName($key);
@@ -129,6 +132,18 @@ class PostfixInstanceController extends Controller
      */
     public function editServiceAction(Request $request, Service $service)
     {
+//        $yaml = Yaml::parse(file_get_contents(__DIR__.'/../../../app/config/postfix.yml'));
+//        foreach ($yaml['master'] as $key => $value) {
+//            $property = new Property();
+//            $property->setName($key);
+//            $property->setType($value['type']);
+//            $property->setValue($value['value']);
+//            $property->setDescription($value['description']);
+//            $property->setIsNew(true);
+//
+//            $service->addProperty($property);
+//        }
+
         $form = $this->createForm(ServiceType::class, $service);
         $form->handleRequest($request);
         if ($form->isValid()) {

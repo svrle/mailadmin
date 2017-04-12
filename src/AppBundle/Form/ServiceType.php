@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 use AppBundle\Entity\Service;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,39 +29,42 @@ class ServiceType extends AbstractType
                 )
             ))
             ->add('private', ChoiceType::class, array(
-                'data' => '-',
+//                'data' => '-',
                 'choices' => array(
+                    'Default' => '-',
                     'Yes' => 'y',
-                    'No' => 'n',
-                    'Default' => '-'
+                    'No' => 'n'
                 )
             ))
             ->add('unpriv', ChoiceType::class, array(
-                'data' => '-',
+//                'data' => '-',
                 'choices' => array(
+                    'Default' => '-',
                     'Yes' => 'y',
-                    'No' => 'n',
-                    'Default' => '-'
+                    'No' => 'n'
                 )
             ))
             ->add('chroot', ChoiceType::class, array(
-                'data' => '-',
+//                'data' => '-',
                 'choices' => array(
+                    'Default' => '-',
                     'Yes' => 'y',
-                    'No' => 'n',
-                    'Default' => '-'
+                    'No' => 'n'
                 )
             ))
             ->add('wakeup', ChoiceType::class, array(
-                'data' => '-',
+//                'data' => '-',
                 'choices' => array(
+                    'Default' => '-',
                     'Yes' => 'y',
-                    'No' => 'n',
-                    'Default' => '-'
+                    'No' => 'n'
                 )
             ))
             ->add('maxproc')
             ->add('command')
+            ->add('properties', CollectionType::class, array('entry_type' => PropertyType::class,
+                'allow_add' => true,
+                'by_reference' => false,))
 //            ->add('value')
 
             ->add('save', SubmitType::class)

@@ -36,3 +36,16 @@ main:
                     Time units: s (seconds), m (minutes), h (hours), d (days), w (weeks).
 
                     This feature is available in Postfix 2.7.
+
+master:
+  master_property_test:
+     type: string
+     value: asdf
+     description:  |
+      The amount of time between verify(8) address verification database cleanup runs. This feature requires that the database supports the "delete" and "sequence" operators. Specify a zero interval to disable database cleanup.
+
+                    After each database cleanup run, the verify(8) daemon logs the number of entries that were retained and dropped. A cleanup run is logged as "partial" when the daemon terminates early after "postfix reload", "postfix stop", or no requests for $max_idle seconds.
+
+                    Time units: s (seconds), m (minutes), h (hours), d (days), w (weeks).
+
+                    This feature is available in Postfix 2.7.
