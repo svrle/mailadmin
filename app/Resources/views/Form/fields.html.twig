@@ -5,6 +5,7 @@
         {%- set type = type|default('text') -%}
         {% if property_value is defined %}
             {% if property_value is not null %}
+                <a name="{{ property_name }}"></a>
                 <label>{{ property_name|humanize }}<br \><h6>({{ property_description }})</h6></label>
                 <input type="{{ type }}" {{ block('widget_attributes') }} {% if property_value is not empty %}value="{{ property_value }}" {% endif %}/>
             {% endif %}

@@ -11,7 +11,7 @@
         <a href="{{ path('postfix_edit_service', { 'service': service.id }) }}">{{ service }} {{ service.type }} {{ service.private }} {{ service.unpriv }} {{ service.chroot }} {{ service.wakeup }} {{ service.maxproc }} {{ service.command }}</a> <a href="{{ path('service_property_new', { 'service': service.id }) }}">add</a>
         {% for property in service.properties %}
 
-            <br />&nbsp;&nbsp;-o <a href="{{ path('property_edit', { 'property': property.id }) }}">{{ property }}={{ property.value }} ( {{ property.getOverridedMainFunction }} )</a>
+            <br />&nbsp;&nbsp;-o <a href="{{ path('property_edit', { 'property': property.id }) }}">{{ property }}={{ property.value }}</a> ( <a href="{{ path('property_edit', { 'property': property.id }) }}">{{ property.getOverridedMainFunction }}</a> )
         {% endfor %}
         <br />
     {% endfor %}
