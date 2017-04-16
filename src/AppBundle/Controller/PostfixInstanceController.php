@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\PostfixInstance;
 use AppBundle\Entity\Property;
 use AppBundle\Entity\Service;
+use AppBundle\Form\ConfigType;
+use AppBundle\Form\ConfigTypeT;
 use AppBundle\Form\PostfixInstanceType;
 use AppBundle\Form\PropertyType;
 use AppBundle\Form\ServiceType;
@@ -159,10 +161,11 @@ class PostfixInstanceController extends Controller
      * @param Request $request
      * @param PostfixInstance $postfix
      * @return RedirectResponse|Response
+     * @Route("/postfix/configuration/edit/{postfix}", name="postfix_edit_configuration", requirements={"postfix": "\d+"})
      */
     public function editConfigAction(Request $request, PostfixInstance $postfix)
     {
-        $form = $this->createForm(PostfixInstanceType::class, $postfix);
+        $form = $this->createForm(ConfigType::class, $postfix);
         $form->handleRequest($request);
         if ($form->isValid()) {
 //            $postfixInstance->createFolderStructure();
@@ -170,9 +173,9 @@ class PostfixInstanceController extends Controller
             $em->persist($postfix);
             $em->flush();
 //            new PostfixProcess($postfixInstance);
-            return $this->redirect($this->generateUrl('postfix_homepage'));
+            return $this->redirect($this->generateUrl('postfix_details', array('postfix' => $postfix->getId())));
         }
-        return $this->render('postfixInstance/new.html.twig', array('form' => $form->createView()));
+        return $this->render('postfixInstance/editConfig.html.twig', array('form' => $form->createView()));
     }
 
 }

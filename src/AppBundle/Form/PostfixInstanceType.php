@@ -18,8 +18,8 @@ class PostfixInstanceType extends AbstractType
             ->add('name')
             ->add('domains')
             ->add('isSingleInstance')
-//            ->add('properties', CollectionType::class, array('entry_type' => PropertyType::class,
-//                'by_reference' => false))
+            ->add('properties', CollectionType::class, array('entry_type' => PropertyType::class,
+                'by_reference' => false))
             ->add('save', SubmitType::class)
         ;
     }

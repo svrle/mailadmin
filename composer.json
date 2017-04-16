@@ -37,7 +37,8 @@
         "symfony/process": "^3.2",
 	"twitter/bootstrap": "3.*",
 	"components/jquery": "1.11.1",
-        "braincrafted/bootstrap-bundle": "@stable"
+        "braincrafted/bootstrap-bundle": "@stable",
+        "twbs/bootstrap": "^3.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

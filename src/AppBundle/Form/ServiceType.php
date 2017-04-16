@@ -62,9 +62,7 @@ class ServiceType extends AbstractType
             ))
             ->add('maxproc')
             ->add('command')
-            ->add('properties', CollectionType::class, array('entry_type' => PropertyType::class,
-                'allow_add' => true,
-                'by_reference' => false,))
+            ->add('properties', CollectionType::class, array('entry_type' => PropertyType::class))
 //            ->add('value')
 
             ->add('save', SubmitType::class)
