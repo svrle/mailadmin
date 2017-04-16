@@ -37,6 +37,25 @@ class PropertyController extends Controller
 
     /**
      * @param Request $request
+     * @param Property $property
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @Route("/property/edit/{property}", name="property_edit", requirements={"property": "\d+"})
+     */
+    public function editAction(Request $request, Property $property)
+    {
+        $form = $this->createForm(PropertyType::class, $property);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($property);
+            $em->flush();
+            return $this->redirect($this->generateUrl('postfix_new_service', array('postfix' => $property->getPostfixInstances()->getId())));
+        }
+        return $this->render('property/edit.html.twig', array('form' => $form->createView()));
+    }
+
+    /**
+     * @param Request $request
      * @param Service $service
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @Route("/service/property/new/{service}", name="service_property_new", requirements={"service": "\d+"})
