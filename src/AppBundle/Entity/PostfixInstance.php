@@ -108,6 +108,7 @@ class PostfixInstance
         return $this->name;
     }
 
+
     //second
     /**
      * Need to set configuration of main.cf before creating spool structure and activate instance

@@ -43,6 +43,19 @@ class Property
         }
     }
 
+    public function getOverridedMainFunction()
+    {
+        $value = null;
+        foreach ($this->service->getPostfixInstance()->getProperties() as $property) {
+//            echo $service;
+            if($this->getName() === $property->getName()) {
+                $value = $property->getValue();
+            }
+        }
+
+        return $value;
+    }
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")

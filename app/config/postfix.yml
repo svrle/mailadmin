@@ -38,9 +38,9 @@ main:
                     This feature is available in Postfix 2.7.
 
 master:
-  master_property_test:
+  2bounce_notice_recipient:
      type: string
-     value: asdf
+     value: 054
      description:  |
       The amount of time between verify(8) address verification database cleanup runs. This feature requires that the database supports the "delete" and "sequence" operators. Specify a zero interval to disable database cleanup.
 

@@ -10,7 +10,8 @@
     {% for service in postfix.services %}
         {{ service }} {{ service.type }} {{ service.private }} {{ service.unpriv }} {{ service.chroot }} {{ service.wakeup }} {{ service.maxproc }} {{ service.command }} <a href="{{ path('postfix_edit_service', { 'service': service.id }) }}">edit</a>
         {% for property in service.properties %}
-            <br />&nbsp;&nbsp;-o {{ property }}={{ property.value }} - is overrided from main.cf?
+
+            <br />&nbsp;&nbsp;-o {{ property }}={{ property.value }} ( {{ property.getOverridedMainFunction }} )
         {% endfor %}
         <br />
     {% endfor %}

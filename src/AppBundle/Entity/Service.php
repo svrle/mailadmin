@@ -22,6 +22,8 @@ class Service
         $this->properties = new ArrayCollection() ;
     }
 
+
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
