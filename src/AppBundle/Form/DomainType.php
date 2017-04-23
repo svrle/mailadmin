@@ -30,7 +30,7 @@ class DomainType extends AbstractType
             ->add('emailNumbers', null, array('attr' => array('min' => 0, 'max' => 1024), 'label' => 'domain.form.email_numbers'))
             ->add('aliasNumbers', null, array('attr' => array('min' => 0, 'max' => 1024), 'label' => 'domain.form.alias_numbers'))
 
-            ->add('save', SubmitType::class, array('label' => 'domain.form.btn_save'))
+//            ->add('save', SubmitType::class, array('label' => 'domain.form.btn_save', 'attr' => array('class' => 'form-control')))
         ;
 
 

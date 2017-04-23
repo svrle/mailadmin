@@ -22,14 +22,14 @@ class DomainController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->findAll();
-        $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $domainRepo, /* query NOT result */
-            $request->query->getInt('page', 1)/*page number*/,
-            $this->getParameter('knp_per_page')/*limit per page*/
-        );
-        return $this->render('domain/index.html.twig', ['domains' => $pagination]);
+//        $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->findAll();
+//        $paginator  = $this->get('knp_paginator');
+//        $pagination = $paginator->paginate(
+//            $domainRepo, /* query NOT result */
+//            $request->query->getInt('page', 1)/*page number*/,
+//            $this->getParameter('knp_per_page')/*limit per page*/
+//        );
+//        return $this->render('domain/index.html.twig', ['domains' => $pagination]);
     }
 
     /**
@@ -39,6 +39,14 @@ class DomainController extends Controller
      */
     public function newAction(Request $request)
     {
+        $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->findAll();
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $domainRepo, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            $this->getParameter('knp_per_page')/*limit per page*/
+        );
+
         $domain = new Domain();
         $form = $this->createForm(DomainType::class, $domain);
         $form->handleRequest($request);
@@ -48,7 +56,7 @@ class DomainController extends Controller
             $em->flush();
             return $this->redirect($this->generateUrl('domain_homepage'));
         }
-        return $this->render('domain/new.html.twig', array('form' => $form->createView()));
+        return $this->render('domain/new.html.twig', array('form' => $form->createView(), 'domains' => $pagination));
 
     }
 

@@ -1,8 +1,115 @@
 {% extends 'base.html.twig' %}
-
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
-{% endblock %}
 
+
+    <div class="container">
+        <div class="row">
+
+       <div class="col-md-8">
+        <table class="table table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Domain</th>
+                <th>Email Count</th>
+                <th>Email Numbers</th>
+                <th>Alias Count</th>
+                <th>Alias Numbers</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for domain in domains %}
+            <tr>
+                <th scope="row">1</th>
+                <td> <a href="{{ path('email_list', { 'domain': domain.id }) }}">{{ domain.name }}</a> </td>
+                <td> {{ domain.countOnlyEmails }} </td>
+                <td> {{ domain.emailNumbers }} </td>
+                <td>{{ domain.countOnlyAliases }}</td>
+                <td>{{ domain.aliasNumbers }}</td>
+
+                <td><a class="btn btn-primary" href="{{ path('domain_edit', {'domain': domain.id}) }}">{{ 'domain.twig.btn_edit'|trans }}</a></td>
+                <td><a class="btn btn-info" href="{{ path('email_registration', { 'domain': domain.id }) }}">{{ 'domain.twig.btn_email'|trans }}</a></td>
+                <td><a class="btn btn-info" href="{{ path('alias_new', { 'domain': domain.id }) }}">{{ 'domain.twig.btn_alias'|trans }}</a></td>
+                <td>{% if domain.emailCount == 0 %}
+                        <a class="btn btn-danger" href="{{ path('domain_remove', { 'domain': domain.id }) }}" onclick="return confirm('are u sure?')">Delete</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+       </div>
+
+
+            {{ knp_pagination_render(domains) }}
+
+            <div class="col-md-4">
+                {#{{ form_start(form, { 'attr' : { 'class': 'pull-right' } }) }}#}
+                {{ form_start(form) }}
+
+                {{ form_widget(form) }}
+                <div class="form-group">
+                <button type="submit" class="btn btn-primary" id="domain_save" name="create">Create</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+
+        </div>
+    </div>
+
+
+      {#<div class="col-md-4">#}
+        {#<form name="domain" method="post" class="pull-right">#}
+
+            {#<div id="domain">#}
+                {#<div class="form-group">#}
+                    {#<label for="domain_defaultQuota" class="required">Default quota per account</label>#}
+                    {#<input type="number" class="form-control" id="domain_defaultQuota" name="domain[defaultQuota]" required="required" min="0" max="1024" />#}
+                {#</div>#}
+
+                {#<div class="form-group">#}
+                    {#<label for="domain_emailNumbers" class="required">Number of allowed emails</label>#}
+                    {#<input type="number" class="form-control" id="domain_emailNumbers" name="domain[emailNumbers]" required="required" min="0" max="1024" />#}
+                {#</div>#}
+
+                {#<div class="form-group">#}
+                    {#<label for="domain_aliasNumbers" class="required">Number of allowed aliases</label>#}
+                    {#<input type="number" class="form-control" id="domain_aliasNumbers" name="domain[aliasNumbers]" required="required" min="0" max="1024" />#}
+                {#</div>#}
+
+                {#<div class="form-group">#}
+                    {#<button type="submit" class="btn btn-primary" id="domain_save" name="domain[save]">Create</button>#}
+                {#</div>#}
+
+                {#<div class="form-group">#}
+                    {#<label for="domain_name" class="required">Domain name</label>#}
+                    {#<input type="text" class="form-control" id="domain_name" name="domain[name]" required="required" maxlength="255" />#}
+                {#</div>#}
+
+                {#<div class="form-group">#}
+                    {#<label for="domain_encryptions">Encryptions</label>#}
+                    {#<select id="domain_encryptions" name="domain[encryptions][]" multiple="multiple"></select>#}
+                {#</div>#}
+
+                {#<input type="hidden" class="form-control" id="domain__token" name="domain[_token]" value="JGU8jZ8TeUJfG5GsKrTA_16C5Pz5ybNFn6JqH-_l-jA" />#}
+            {#</div>#}
+        {#</form>#}
+      {#</div>#}
+
+      {#</div>#}
+    {#</div>#}
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
