@@ -35,7 +35,6 @@ class EmailController extends Controller
      */
     public function newAction(Request $request, Domain $domain)
     {
-
         if($domain->isNumberOfEmailsValid() == false)
         {
             throw $this->createNotFoundException(
