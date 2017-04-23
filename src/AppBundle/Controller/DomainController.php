@@ -68,22 +68,30 @@ class DomainController extends Controller
      */
     public function editAction(Request $request, Domain $domain)
     {
-        $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->find($domain);
-        if(!$domainRepo)
-        {
-            throw $this->createNotFoundException(
-                'Wrong domain name'
-            );
-        }
-        $form = $this->createForm(DomainType::class, $domainRepo);
+//        $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->find($domain);
+//        if(!$domainRepo)
+//        {
+//            throw $this->createNotFoundException(
+//                'Wrong domain name'
+//            );
+//        }
+        $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->findAll();
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $domainRepo, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            $this->getParameter('knp_per_page')/*limit per page*/
+        );
+
+        $form = $this->createForm(DomainType::class, $domain);
         $form->handleRequest($request);
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($domainRepo);
+            $em->persist($domain);
             $em->flush();
             return $this->redirect($this->generateUrl('domain_homepage'));
         }
-        return $this->render('domain/new.html.twig', array('form' => $form->createView()));
+        return $this->render('domain/new.html.twig', array('form' => $form->createView(), 'domains' => $pagination));
 
     }
 
