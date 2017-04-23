@@ -24,7 +24,7 @@ class AliasType extends AbstractType
                     ->andWhere('o.password is not null')
                     ;
                 }))
-            ->add('save', SubmitType::class, array('label' => 'alias.form.btn_save'))
+//            ->add('save', SubmitType::class, array('label' => 'alias.form.btn_save'))
         ;
     }
 
