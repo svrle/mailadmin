@@ -201,6 +201,12 @@ class EmailController extends Controller
     public function registerAction(Request $request, Domain $domain)
     {
         // 1) build the form
+        if($domain->isNumberOfEmailsValid() == false)
+        {
+            throw $this->createNotFoundException(
+                "You reach maximum number of emails for $domain"
+            );
+        }
         $email = new Email();
 
         $email->setDomain($domain);
