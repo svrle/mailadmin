@@ -54,7 +54,7 @@ class DomainController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($domain);
             $em->flush();
-            return $this->redirect($this->generateUrl('domain_homepage'));
+            return $this->redirect($this->generateUrl('domain_new'));
         }
         return $this->render('domain/new.html.twig', array('form' => $form->createView(), 'domains' => $pagination));
 
@@ -82,7 +82,7 @@ class DomainController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($domain);
             $em->flush();
-            return $this->redirect($this->generateUrl('domain_homepage'));
+            return $this->redirect($this->generateUrl('domain_new'));
         }
         return $this->render('domain/new.html.twig', array('form' => $form->createView(), 'domains' => $pagination));
 
@@ -116,7 +116,7 @@ class DomainController extends Controller
             );
         }
 
-        return $this->redirectToRoute('domain_homepage');
+        return $this->redirectToRoute('domain_new');
     }
 
 }
