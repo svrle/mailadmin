@@ -208,7 +208,6 @@ class EmailController extends Controller
             );
         }
         $email = new Email();
-
         $email->setDomain($domain);
         $form = $this->createForm(EmailType::class, $email, array('email' => $email));
 

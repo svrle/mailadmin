@@ -27,18 +27,7 @@ class EmailType extends AbstractType
             ->add('name', null, array('label' => 'email.form.name'))
             ->add('surname', null, array('label' => 'email.form.surname'))
             ->add('quota', null, array('label' => 'email.form.quota'))
-            ->add('aliases', null, array('label' => 'email.form.alias',
-                'class' => 'AppBundle\Entity\Email',
-                'query_builder' => function(EntityRepository $entityRepository) {
-                $form = $entityRepository->createQueryBuilder('o')
-                    ->where('o.domain = :domain')->setParameter('domain', $this->email->getDomain())
-                    ->andWhere('o.quota is null');
-                    if($this->email->getId())
-                    {
-                        $form->andWhere('o != :thisEmail')->setParameter('thisEmail', $this->email);
-                    }
-                    return $form;
-            }))
+
         ;
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $object= $event->getData();
@@ -59,6 +48,23 @@ class EmailType extends AbstractType
                     'first_options'  => array('label' => 'Password'),
                     'second_options' => array('label' => 'Repeat Password'),
                 ));
+            }
+
+            if($object->getDomain()->getCountOnlyAliases() >= 1) {
+                $form->add('aliases', null, array('label' => 'email.form.alias',
+                    'class' => 'AppBundle\Entity\Email',
+                    'query_builder' => function(EntityRepository $entityRepository) {
+                        $form = $entityRepository->createQueryBuilder('o')
+                            ->where('o.domain = :domain')->setParameter('domain', $this->email->getDomain())
+                            ->andWhere('o.quota is null');
+                        if($this->email->getId())
+                        {
+                            $form->andWhere('o != :thisEmail')->setParameter('thisEmail', $this->email);
+                        }
+                        return $form;
+                    }));
+            } else {
+
             }
         });
 //        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
