@@ -68,13 +68,6 @@ class DomainController extends Controller
      */
     public function editAction(Request $request, Domain $domain)
     {
-//        $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->find($domain);
-//        if(!$domainRepo)
-//        {
-//            throw $this->createNotFoundException(
-//                'Wrong domain name'
-//            );
-//        }
         $domainRepo = $this->getDoctrine()->getRepository('AppBundle:Domain')->findAll();
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
