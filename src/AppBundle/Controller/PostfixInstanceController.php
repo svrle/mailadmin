@@ -74,7 +74,7 @@ class PostfixInstanceController extends Controller
             $em->persist($postfixInstance);
             $em->flush();
 //            new PostfixProcess($postfixInstance);
-            return $this->redirect($this->generateUrl('postfix_homepage'));
+            return $this->redirect($this->generateUrl('postfix_new'));
         }
         return $this->render('postfixInstance/new.html.twig', array('form' => $form->createView(), 'postfixes' => $pagination));
     }
