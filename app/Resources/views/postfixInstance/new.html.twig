@@ -5,13 +5,15 @@
  <div class="container">
      <div class="row">
 
-        <div class="col-md-4">
+        <div class="col-md-6">
 
 
 
             <table class="table table">
                 <thead>
                 <tr>
+                    <th>Hostname</th>
+                    <th>IP</th>
                     <th>Name</th>
                 </tr>
                 </thead>
@@ -20,6 +22,14 @@
                  {% for postfix in postfixes %}
                     <tr>
                         <td>
+                            <p>{{ postfix.hostname }}</p>
+                        </td>
+
+                        <td>
+                            <p>{{ postfix.ip }}</p>
+                        </td>
+
+                        <td>
                             <a href="{{ path('postfix_details', { 'postfix': postfix.id }) }}">{{ postfix.name }}</a>
                         </td>
                     </tr>
@@ -27,12 +37,13 @@
                 </tbody>
             </table>
 
+        <div class="pull-center">
             {{ knp_pagination_render(postfixes) }}
-
+        </div>
 
         </div>
 
-        <div class="col-md-6 pull-right">
+        <div class="col-md-5 pull-right">
 
 
             {{ form_start(form) }}
