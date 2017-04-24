@@ -42,9 +42,8 @@
        </div>
 
 
-            {{ knp_pagination_render(domains) }}
 
-            <div class="col-md-4 pull-right">
+            <div class="col-md-3 pull-right">
                 {#{{ form_start(form, { 'attr' : { 'class': 'pull-right' } }) }}#}
                 {{ form_start(form) }}
 
@@ -56,10 +55,13 @@
             </div>
 
         </div>
+        {{ knp_pagination_render(domains) }}
+
     </div>
 
 
-      {#<div class="col-md-4">#}
+
+    {#<div class="col-md-4">#}
         {#<form name="domain" method="post" class="pull-right">#}
 
             {#<div id="domain">#}

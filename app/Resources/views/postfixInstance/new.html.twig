@@ -2,18 +2,51 @@
 
 
 {% block body %}
+ <div class="container">
+     <div class="row">
 
-    {% for postfix in postfixes %}
-        <a href="{{ path('postfix_details', { 'postfix': postfix.id }) }}">{{ postfix.name }}</a><br \>
-    {% endfor %}
-    {{ knp_pagination_render(postfixes) }}
-    <p />
-    {{ form_start(form) }}
-    {#{{ form_widget(form) }}#}
-    {#{% for property in form.properties %}#}
-        {#{{ form_widget(property) }}#}
-    {#{% endfor %}#}
-    {{ form_rest(form) }}
-    {{ form_end(form) }}
+        <div class="col-md-4">
+
+
+
+            <table class="table table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                 {% for postfix in postfixes %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('postfix_details', { 'postfix': postfix.id }) }}">{{ postfix.name }}</a>
+                        </td>
+                    </tr>
+                 {% endfor %}
+                </tbody>
+            </table>
+
+            {{ knp_pagination_render(postfixes) }}
+
+
+        </div>
+
+        <div class="col-md-6 pull-right">
+
+
+            {{ form_start(form) }}
+            {#{{ form_widget(form) }}#}
+            {#{% for property in form.properties %}#}
+                {#{{ form_widget(property) }}#}
+            {#{% endfor %}#}
+            {{ form_rest(form) }}
+            {{ form_end(form) }}
+
+
+        </div>
+
+     </div>
+ </div>
 {% endblock %}
 

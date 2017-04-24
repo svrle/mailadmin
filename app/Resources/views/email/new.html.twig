@@ -1,14 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="col-lg-6">
-    {{ form_start(form) }}
+   <div class="container">
+    <div class="col-md-8">
+        {{ form_start(form) }}
 
-    {#{{ form_label(form.username) }}<br />#}
-    {#{{ form_errors(form.username) }}#}
-    {#{{ form_widget(form.username) }} @ {{ entity.domain }}#}
+        {#{{ form_label(form.username) }}<br />#}
+        {#{{ form_errors(form.username) }}#}
+        {#{{ form_widget(form.username) }} @ {{ entity.domain }}#}
 
-    {{ form_rest(form) }}
-    {{ form_end(form) }}
-</div>
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </div>
+   </div>
 {% endblock %}
