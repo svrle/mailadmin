@@ -22,7 +22,8 @@
                  {% for postfix in postfixes %}
                     <tr>
                         <td>
-                            <p>{{ postfix.hostname }}</p>
+                            <a href="{{ path('postfix_details', { 'postfix': postfix.id }) }}">{{ postfix.hostname }}</a>
+
                         </td>
 
                         <td>
@@ -30,7 +31,7 @@
                         </td>
 
                         <td>
-                            <a href="{{ path('postfix_details', { 'postfix': postfix.id }) }}">{{ postfix.name }}</a>
+                            <p>{{ postfix.name }}</p>
                         </td>
                     </tr>
                  {% endfor %}
