@@ -9,7 +9,6 @@
         <table class="table table">
             <thead>
             <tr>
-                <th>#</th>
                 <th>Domain</th>
                 <th>Email Count</th>
                 <th>Email Numbers</th>
@@ -21,7 +20,6 @@
             <tbody>
             {% for domain in domains %}
             <tr>
-                <th scope="row">1</th>
                 <td> <a href="{{ path('email_list', { 'domain': domain.id }) }}">{{ domain.name }}</a> </td>
                 <td> {{ domain.countOnlyEmails }} </td>
                 <td> {{ domain.emailNumbers }} </td>

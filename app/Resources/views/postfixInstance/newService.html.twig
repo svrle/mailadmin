@@ -3,23 +3,88 @@
 
 {% block body %}
 
-    <p>{{ postfix }}</p><br />
-    # ==========================================================================<br />
-    # service type  private(yes) unpriv(yes)  chroot(yes)  wakeup(never)  maxproc(100) command + args<br />
-    # ==========================================================================<br />
-    {% for service in postfix.services %}
-        <a href="{{ path('postfix_edit_service', { 'service': service.id }) }}">{{ service }} {{ service.type }} {{ service.private }} {{ service.unpriv }} {{ service.chroot }} {{ service.wakeup }} {{ service.maxproc }} {{ service.command }}</a> <a href="{{ path('service_property_new', { 'service': service.id }) }}">add</a>
-        {% for property in service.properties %}
 
-            <br />&nbsp;&nbsp;-o <a href="{{ path('property_edit', { 'property': property.id }) }}">{{ property }}={{ property.value }}</a> ( <a href="{{ path('property_edit', { 'property': property.id }) }}">{{ property.getOverridedMainFunction }}</a> )
-        {% endfor %}
-        <br />
-    {% endfor %}
-    <p />
-    {{ form_start(form) }}
-    {{ form_rest(form) }}
-    {{ form_end(form) }}
+
+
+
+
+
+    <div class="container">
+
+        <h2 class="page-header"> {{ postfix }} </h2>
+
+        <div class="row">
+
+            <div class="col-md-8">
+                <table class="table table-bordered">
+                    <thead>
+
+                    <tr>
+                        <th>Service</th>
+                        <th>Type</th>
+                        <th>Private</th>
+                        <th>Unpriv</th>
+                        <th>Chroot</th>
+                        <th>Wakeup</th>
+                        <th>Maxproc</th>
+                        <th>Command</th>
+                        <th><span></span></th>
+
+                    </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                    {% for service in postfix.services %}
+
+                        <a href="{{ path('postfix_edit_service', { 'service': service.id }) }}">
+
+                            <tr>
+                                <td> {{ service }} </td>
+                                <td> {{ service.type }} </td>
+                                <td> {{ service.private }} </td>
+                                <td> {{ service.unpriv }} </td>
+                                <td> {{ service.chroot }} </td>
+                                <td> {{ service.wakeup }} </td>
+                                <td> {{ service.maxproc }} </td>
+                                <td> {{ service.command }} </td>
+                        </a>
+
+                        <td> <a class="btn btn-primary" href="{{ path('service_property_new', { 'service': service.id }) }}">add</a> </td>
+
+                        </tr>
+                     {% for property in service.properties %}
+
+                    <tr>
+
+                    <td colspan="9"><a href="{{ path('property_edit', { 'property': property.id }) }}">{{ property }}={{ property.value }}</a> ( <a href="{{ path('property_edit', { 'property': property.id }) }}">{{ property.getOverridedMainFunction }}</a> )</td>
+
+                    </tr>
+
+                     {% endfor %}
+                    {% endfor %}
+
+
+                    </tbody>
+
+                </table>
+            </div>
+
+
+
+            <div class="col-md-4">
+
+                {{ form_start(form) }}
+                {{ form_rest(form) }}
+                {{ form_end(form) }}
+
+            </div>
+
+
+
+        </div>
+    </div>
+
 {% endblock %}
-
-
-{#master.cf#}
