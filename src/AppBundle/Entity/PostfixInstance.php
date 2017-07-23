@@ -60,6 +60,11 @@ class PostfixInstance
     protected $domains;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $master;
+
+    /**
      * @return mixed
      */
     public function getDomains()
@@ -244,6 +249,23 @@ class PostfixInstance
             $property->removePostfixInstance($this);
         }
     }
+
+    /**
+     * @return mixed
+     */
+    public function getMaster()
+    {
+        return $this->master;
+    }
+
+    /**
+     * @param mixed $master
+     */
+    public function setMaster($master)
+    {
+        $this->master = $master;
+    }
+
 
 
 }
