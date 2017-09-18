@@ -15,6 +15,7 @@
                     <th>Hostname</th>
                     <th>IP</th>
                     <th>Name</th>
+                    <th>master.cf</th>
                 </tr>
                 </thead>
 
@@ -22,7 +23,8 @@
                  {% for postfix in postfixes %}
                     <tr>
                         <td>
-                            <a href="{{ path('postfix_details', { 'postfix': postfix.id }) }}">{{ postfix.hostname }}</a>
+                            <a href="{{ path('postfix_edit_configuration', { 'postfix': postfix.id }) }}">{{ postfix.hostname }}</a>
+
 
                         </td>
 
@@ -33,6 +35,11 @@
                         <td>
                             <p>{{ postfix.name }}</p>
                         </td>
+
+                        <td>
+                            <a href="{{ path('postfix_new_service', { 'postfix': postfix.id }) }}">master.cf</a>
+                        </td>
+
                     </tr>
                  {% endfor %}
                 </tbody>

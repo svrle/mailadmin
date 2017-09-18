@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <div id="wrapper">
-        <a href="{{ path('postfix_new_service', { 'postfix': postfix.id }) }}">master.cf</a> -
-        <a href="{{ path('postfix_edit_configuration', { 'postfix': postfix.id }) }}">main.cf</a>
+
+        <h11>DEPRECATED!!</h11>
         <div id="container">
             {{ postfix }} - {{ postfix.ip }} - {{ postfix.hostname }} - {{ postfix.isSingleInstance }}
         </div>
