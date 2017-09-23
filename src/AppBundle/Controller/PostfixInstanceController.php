@@ -186,7 +186,7 @@ class PostfixInstanceController extends Controller
      */
     public function goAction(Request $request, PostfixInstance $postfixInstance)
     {
-        return $this->render('postfixInstance/ansible/postfix.yml.twig', $postfixInstance);
+        return $this->render('ansible/postfix.yml.twig', array('postfix' => $postfixInstance));
     }
 
 }

@@ -16,6 +16,7 @@
                     <th>IP</th>
                     <th>Name</th>
                     <th>master.cf</th>
+                    <th>go</th>
                 </tr>
                 </thead>
 
@@ -41,7 +42,7 @@
                         </td>
 
                         <td>
-                        <a href="{{ path('ansible_go_postfix', { 'postfix': postfix.id }) }}">go</a>
+                        <a href="{{ path('ansible_go_postfix', { 'postfixInstance': postfix.id }) }}">go</a>
                         </td>
 
 
