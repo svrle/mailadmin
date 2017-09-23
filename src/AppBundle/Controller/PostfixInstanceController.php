@@ -178,4 +178,9 @@ class PostfixInstanceController extends Controller
         return $this->render('postfixInstance/editConfig.html.twig', array('form' => $form->createView()));
     }
 
+    public function goAction(Request $request, PostfixInstance $postfixInstance)
+    {
+        return $this->render('postfixInstance/ansible/postfix.yml.twig', $postfixInstance);
+    }
+
 }
