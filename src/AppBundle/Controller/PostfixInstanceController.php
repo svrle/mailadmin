@@ -182,7 +182,7 @@ class PostfixInstanceController extends Controller
      * @param Request $request
      * @param PostfixInstance $postfixInstance
      * @return Response
-     * @Rroute("/ansible/postfix/go/{postfixInstance}", name="ansible_go_postfix", requirements={"postfixInstance": "\d+"})
+     * @Route("/ansible/postfix/go/{postfixInstance}", name="ansible_go_postfix", requirements={"postfixInstance": "\d+"})
      */
     public function goAction(Request $request, PostfixInstance $postfixInstance)
     {
