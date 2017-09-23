@@ -178,6 +178,12 @@ class PostfixInstanceController extends Controller
         return $this->render('postfixInstance/editConfig.html.twig', array('form' => $form->createView()));
     }
 
+    /**
+     * @param Request $request
+     * @param PostfixInstance $postfixInstance
+     * @return Response
+     * @route("/ansible/postfix/go/{postfixInstance}", name="ansible_go_postfix", requirements={"postfixInstance": "\d+"})
+     */
     public function goAction(Request $request, PostfixInstance $postfixInstance)
     {
         return $this->render('postfixInstance/ansible/postfix.yml.twig', $postfixInstance);
