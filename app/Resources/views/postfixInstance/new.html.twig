@@ -40,6 +40,12 @@
                             <a href="{{ path('postfix_new_service', { 'postfix': postfix.id }) }}">master.cf</a>
                         </td>
 
+                        <td>
+                        <a href="{{ path('ansible_go_postfix', { 'postfix': postfix.id }) }}">go</a>
+                        </td>
+
+
+
                     </tr>
                  {% endfor %}
                 </tbody>
