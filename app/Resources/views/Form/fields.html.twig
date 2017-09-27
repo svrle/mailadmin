@@ -1,7 +1,6 @@
 {% extends 'form_div_layout.html.twig' %}
 
-{#{%- block form_widget_simple -%}#}
-{%- block posfix_property_widget -%}
+{%- block form_widget_simple -%}
     {% spaceless %}
         {%- set type = type|default('text') -%}
         {% if property_value is defined %}
@@ -14,5 +13,9 @@
             <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
         {% endif %}
     {% endspaceless %}
+{%- endblock form_widget_simple -%}
+
+{#{%- block form_widget_simple -%}#}
+    {#{%- set type = type|default('text') -%}#}
+    {#<input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>#}
 {#{%- endblock form_widget_simple -%}#}
-{%- endblock posfix_property_widget -%}
