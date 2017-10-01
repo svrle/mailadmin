@@ -20,7 +20,7 @@ class PostfixInstanceType extends AbstractType
             ->add('isSingleInstance')
             ->add('master')
             ->add('properties', CollectionType::class, array('entry_type' => PropertyType::class,
-                'by_reference' => false))
+                'by_reference' => false, 'label' => false))
             ->add('save', SubmitType::class)
         ;
     }

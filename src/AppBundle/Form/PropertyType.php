@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Property;
@@ -8,7 +9,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PropertyType extends AbstractType
@@ -21,16 +21,17 @@ class PropertyType extends AbstractType
             $form = $event->getForm();
 
             if ($object->getId() == null && $object->getDescription() == null) {
-                $form->add('name', null)
-                    ->add('value', null)
-                    ->add('type')
+                $form->add('name', null, array('label' => false))
+                    ->add('value', null, array('label' => false))
+                    ->add('type', null, array('label' => false))
                     ->add('save', SubmitType::class);
-            }else{
-                $form->add('value', TextType::class, array('property_value' => 'value',
+            } else {
+                $form->add('value', TextType::class, array(
+                    'property_value' => 'value',
                     'property_name' => 'name',
                     'property_description' => 'description',
-                    'label' => false))
-                ;
+                    'label' => false,
+                ));
             }
         });
 
@@ -50,7 +51,8 @@ class PropertyType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => Property::class,
-            'property' => null
+            'property' => null,
+            'label' => false,
         ));
     }
 }
